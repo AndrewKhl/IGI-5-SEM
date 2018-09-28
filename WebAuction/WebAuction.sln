@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuction", "WebAuction\WebAuction.csproj", "{9DF319CA-59B5-4055-BB7A-447501D1B383}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DF319CA-59B5-4055-BB7A-447501D1B383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF319CA-59B5-4055-BB7A-447501D1B383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF319CA-59B5-4055-BB7A-447501D1B383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF319CA-59B5-4055-BB7A-447501D1B383}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8264C845-23B3-4790-95F3-05C427571A6B}
+	EndGlobalSection
+EndGlobal

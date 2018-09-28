@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebAuction.Models.Lot>
+@{
+    //ViewData["Title"] = "Список смартфонов";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Аукцион</title>
+</head>
+<body>
+    <h3>Лоты</h3>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td>Начальная цена</td>
+            <td>Цена выкупа</td>
+        </tr>
+        @foreach (var lot in Model)
+        {
+            <tr>
+                <td>@lot.Id</td>
+                <td>@lot.NameLot</td>
+                <td>@lot.StartPrice</td>
+                <td>@lot.RedemptionPrice</td>
+                <td><a href="~/Home/Buy/@lot.Id">Сделать ставку</a></td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
