@@ -14,10 +14,7 @@ D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAu
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.TagHelpers.input.cache
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.TagHelpers.output.cache
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.RazorCoreGenerate.cache
-D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
-D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
-D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
