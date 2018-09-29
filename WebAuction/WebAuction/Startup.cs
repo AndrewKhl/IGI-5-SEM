@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebAuction.Models;   // пространство имен моделей
 using Microsoft.EntityFrameworkCore; // пространство имен EntityFramework
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebAuction
 {
@@ -20,6 +21,13 @@ namespace WebAuction
 		{
 			string connection = Configuration.GetConnectionString("DefaultConnection");
 			services.AddDbContext<AuctionContext>(options => options.UseSqlServer(connection));
+
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options => 
+				{
+					options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+				});
+
 			services.AddMvc();
 		}
 
@@ -35,6 +43,7 @@ namespace WebAuction
 			}
 
 			app.UseStaticFiles();
+			app.UseAuthentication();
 
 			app.UseMvc(routes =>
 			{

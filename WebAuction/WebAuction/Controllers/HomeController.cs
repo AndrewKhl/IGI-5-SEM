@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAuction.Models;
 
@@ -15,6 +16,8 @@ namespace WebAuction.Controllers
 		{
 			db = context;
 		}
+
+		[Authorize]
 		public IActionResult Index()
 		{
 			return View(db.Lots.ToList());

@@ -61,7 +61,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(113, 43, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "489794d98d254a879ae16dd30cad1d23", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "068a40a6be274aeda8d7e0cfba4eff54", async() => {
                 BeginContext(119, 30, true);
                 WriteLiteral("\r\n    <title>Аукцион</title>\r\n");
                 EndContext();
@@ -81,7 +81,7 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(158, 549, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7e7a5b36b4d54dbda5d2b3c062f191aa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad03a4e90aaa4272b1971d9bb91c7804", async() => {
                 BeginContext(164, 190, true);
                 WriteLiteral("\r\n    <h3>Лоты</h3>\r\n    <table>\r\n        <tr>\r\n            <td>ID</td>\r\n            <td>Название</td>\r\n            <td>Начальная цена</td>\r\n            <td>Цена выкупа</td>\r\n        </tr>\r\n");
                 EndContext();
@@ -135,7 +135,7 @@ using WebAuction.Models;
                 WriteLiteral("</td>\r\n                <td>");
                 EndContext();
                 BeginContext(602, 47, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "89cf35483ebb4d71a98094d3c0b8faae", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "61f07fcb414c4129a2db76fa7ccad172", async() => {
                     BeginContext(631, 14, true);
                     WriteLiteral("Сделать ставку");
                     EndContext();

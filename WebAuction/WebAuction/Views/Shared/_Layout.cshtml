@@ -12,7 +12,10 @@
 </head>
 <body>
     <!--меню-->
-
+    <form asp-action="Logout" asp-controller="Account">
+        <button>Logout</button>
+    </form>
+ 
     <div style="position:absolute; left:18vw; top:7vh">
         @RenderBody()
     </div>
