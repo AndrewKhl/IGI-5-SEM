@@ -13,6 +13,7 @@ namespace WebAuction.ViewModels
 
 		[Required(ErrorMessage = "Не указан пароль")]
 		[DataType(DataType.Password)]
+		[Compare("Password", ErrorMessage = "Пароль введен неверно")]
 		public string Password { get; set; }
 	}
 }
