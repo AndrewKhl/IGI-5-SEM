@@ -34,3 +34,16 @@
     background: #ffc31f;
     color: black;
 }
+
+.center-form {
+    position: relative;
+    left: 40vw;
+    top: 40vh;
+}
+
+.caption {
+    font-size: 700%; 
+    position:absolute;
+    top: 20vh;
+    left: 38vw;
+}
