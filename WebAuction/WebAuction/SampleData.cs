@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAuction.Models;
+using WebAuction.Controllers;
 
 namespace WebAuction
 {
@@ -12,6 +13,24 @@ namespace WebAuction
 		{
 			if (!context.Lots.Any())
 			{
+				string adminRoleName = "admin";
+				string userRoleName = "user";
+
+				string adminEmail = "admin@mail.ru";
+				//string adminPassword = AccountController.HashPassword("123456");
+
+				// добавляем роли
+				Role adminRole = new Role { Name = adminRoleName };
+				Role userRole = new Role { Name = userRoleName };
+
+				context.Roles.Add(userRole);
+				context.Roles.Add(adminRole);
+
+				// добавляем администратора
+				//context.Users.Add(new User { Email = adminEmail, Password = adminPassword, Role = adminRole, Nickname="Admin" });
+
+				context.SaveChanges();
+
 				context.Lots.AddRange(new Lot
 					{
 						NameLot = "Cat Palina",
@@ -20,7 +39,7 @@ namespace WebAuction
 						Quantity = 1,
 						DateStart = new DateTime(2000, 10, 5),
 						DateEnd = new DateTime(2000, 10, 5),
-						HostId = 1
+						HostId = 1,
 					}
 					,
 					new Lot

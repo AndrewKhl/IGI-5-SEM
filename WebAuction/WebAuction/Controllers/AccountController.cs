@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using WebAuction.Models;
 using WebAuction.ViewModels;
@@ -31,15 +33,18 @@ namespace WebAuction.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User user = await db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+				string hashPassword = HashPassword(model.Password);
+				User user = await db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == hashPassword);
 				if (user != null)
 				{
+					
 					await Authenticate(user); // аутентификация
 
 					return RedirectToAction("Index", "Home");
 				}
 				ModelState.AddModelError("", "Некорректные логин и(или) пароль");
 			}
+
 			return View(model);
 		}
 		[HttpGet]
@@ -59,7 +64,7 @@ namespace WebAuction.Controllers
 				if (user == null)
 				{
 					// добавляем пользователя в бд
-					user = new User { Email = model.Email, Password = model.Password, Nickname=model.Nickname, Name=model.Name};
+					user = new User { Email = model.Email, Password = HashPassword(model.Password), Nickname=model.Nickname, Name=model.Name};
 					Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
 					if (userRole != null)
 						user.Role = userRole;
@@ -95,6 +100,20 @@ namespace WebAuction.Controllers
 		{
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 			return RedirectToAction("Login", "Account");
+		}
+
+		public string HashPassword(string password)
+		{
+			MD5 md5 = MD5.Create();
+
+			byte[] data = md5.ComputeHash(Encoding.Default.GetBytes(password));
+
+			StringBuilder hash = new StringBuilder();
+
+			for (int i = 0; i < data.Length; i++)
+				hash.Append(data[i].ToString("x2"));
+
+			return hash.ToString();
 		}
 	}
 }
