@@ -58,9 +58,7 @@ namespace WebAuction.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User user = db.Users.FirstOrDefault(u => u.Email == model.Email);
-				if (user == null)
-					user = db.Users.FirstOrDefault(u => u.Nickname == model.Nickname);
+				User user = db.Users.FirstOrDefault(u => u.Email == model.Email || u.Nickname == model.Nickname);
 				if (user == null)
 				{
 					// добавляем пользователя в бд
@@ -77,7 +75,7 @@ namespace WebAuction.Controllers
 					return RedirectToAction("Index", "Home");
 				}
 				else
-					ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+					ModelState.AddModelError("", "Пользователь с таким email/nickname существует");
 			}
 			return View(model);
 		}

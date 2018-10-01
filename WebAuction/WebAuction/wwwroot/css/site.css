@@ -47,3 +47,8 @@
     top: 20vh;
     left: 39vw;
 }
+
+.list-errors ul {
+    list-style: none;
+    color: red;
+}
