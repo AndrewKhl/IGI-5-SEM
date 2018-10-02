@@ -14,8 +14,8 @@ namespace WebAuction.Models
 		public DateTime DateStart { get; set; }
 		public DateTime DateEnd { get; set; }
 		public string Status { get; set; }
-		public int StartPrice { get; set; }
-		public int RedemptionPrice { get; set; }
+		public double StartPrice { get; set; }
+		public double RedemptionPrice { get; set; }
 		public int HostId { get; set; }
 	}
 }

@@ -1,0 +1,69 @@
+﻿@model WebAuction.ViewModels.ChangeLot
+@{
+    ViewData["Title"] = "CreateLot";
+}
+
+<h2>Lot</h2>
+
+<form asp-controller="Lot" asp-action="AddOrChangeLot" asp-anti-forgery="true">
+    <div asp-validation-summary="ModelOnly" class="list-errors"></div>
+    <div class="form-row">
+        <div class="form-group col-md-3 offset-6">
+            <label>Name</label>
+            <input asp-for="NameLot" type="text" class="form-control" placeholder="Name">
+            <span asp-validation-for="NameLot" style="color:red" />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Quantity</label>
+            <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity">
+            <span asp-validation-for="Quantity" style="color:red" />
+        </div>
+    </div>
+
+    <div class="form-group offset-6">
+        <label>Description</label>
+        <textarea type="text" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3 offset-6">
+            <label>Start price</label>
+            <input asp-for="StartPrice" type="number" class="form-control" placeholder="Start price">
+            <span asp-validation-for="StartPrice" style="color:red" />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Redemtion price</label>
+            <input asp-for="RedemptionPrice" type="number" class="form-control" placeholder="Redemtion price">
+            <span asp-validation-for="RedemptionPrice" style="color:red" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3 offset-6">
+            <label>Date start</label>
+            <input asp-for="DateStart" type="datetime" class="form-control" placeholder="Date start">
+            <span asp-validation-for="DateStart" style="color:red" />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Hours in auction</label>
+            <input asp-for="Hours" type="number" class="form-control" placeholder="Hours">
+            <span asp-validation-for="Hours" style="color:red" />
+        </div>
+    </div>
+
+    <div class="offset-11">
+        <input type="submit" class="btn btn-dark offset-5" value="Save" style="width:4vw;" />
+    </div>
+</form>
+
+
+
+
+<div class="form-row">
+    <div class="form-inline col-md-2">
+        <input type="number" class="form-control col-md-4" />
+        <input type="button" class="btn btn-dark offset-1" value="Do bid" style="width:4vw">
+    </div>
+    <input type="button" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
+
+</div>

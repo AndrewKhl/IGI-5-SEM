@@ -100,7 +100,7 @@ namespace WebAuction.Controllers
 			return RedirectToAction("Login", "Account");
 		}
 
-		public string HashPassword(string password)
+		public static string HashPassword(string password)
 		{
 			MD5 md5 = MD5.Create();
 

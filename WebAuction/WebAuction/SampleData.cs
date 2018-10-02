@@ -17,7 +17,7 @@ namespace WebAuction
 				string userRoleName = "user";
 
 				string adminEmail = "admin@mail.ru";
-				//string adminPassword = AccountController.HashPassword("123456");
+				string adminPassword = AccountController.HashPassword("123456");
 
 				// добавляем роли
 				Role adminRole = new Role { Name = adminRoleName };
@@ -27,7 +27,7 @@ namespace WebAuction
 				context.Roles.Add(adminRole);
 
 				// добавляем администратора
-				//context.Users.Add(new User { Email = adminEmail, Password = adminPassword, Role = adminRole, Nickname="Admin" });
+				context.Users.Add(new User { Email = adminEmail, Password = adminPassword, Role = adminRole, Nickname="Admin" });
 
 				context.SaveChanges();
 
