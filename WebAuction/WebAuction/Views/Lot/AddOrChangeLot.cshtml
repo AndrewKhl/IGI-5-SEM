@@ -6,17 +6,17 @@
 <h2>Lot</h2>
 
 <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-anti-forgery="true">
-    <div asp-validation-summary="ModelOnly" class="list-errors"></div>
+    <div asp-validation-summary="ModelOnly" class="list-errors offset-6"></div>
     <div class="form-row">
         <div class="form-group col-md-3 offset-6">
             <label>Name</label>
             <input asp-for="NameLot" type="text" class="form-control" placeholder="Name">
-            <span asp-validation-for="NameLot" style="color:red" />
+            <span asp-validation-for="NameLot" style="color:red"></span>
         </div>
         <div class="form-group col-md-3">
             <label>Quantity</label>
             <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity">
-            <span asp-validation-for="Quantity" style="color:red" />
+            <span asp-validation-for="Quantity" style="color:red"></span>
         </div>
     </div>
 
@@ -29,12 +29,12 @@
         <div class="form-group col-md-3 offset-6">
             <label>Start price</label>
             <input asp-for="StartPrice" type="number" class="form-control" placeholder="Start price">
-            <span asp-validation-for="StartPrice" style="color:red" />
+            <span asp-validation-for="StartPrice" style="color:red"></span>
         </div>
         <div class="form-group col-md-3">
             <label>Redemtion price</label>
             <input asp-for="RedemptionPrice" type="number" class="form-control" placeholder="Redemtion price">
-            <span asp-validation-for="RedemptionPrice" style="color:red" />
+            <span asp-validation-for="RedemptionPrice" style="color:red"></span>
         </div>
     </div>
 
@@ -42,12 +42,12 @@
         <div class="form-group col-md-3 offset-6">
             <label>Date start</label>
             <input asp-for="DateStart" type="datetime" class="form-control" placeholder="Date start">
-            <span asp-validation-for="DateStart" style="color:red" />
+            <span asp-validation-for="DateStart" style="color:red"></span>
         </div>
         <div class="form-group col-md-3">
             <label>Hours in auction</label>
             <input asp-for="Hours" type="number" class="form-control" placeholder="Hours">
-            <span asp-validation-for="Hours" style="color:red" />
+            <span asp-validation-for="Hours" style="color:red"></span>
         </div>
     </div>
 

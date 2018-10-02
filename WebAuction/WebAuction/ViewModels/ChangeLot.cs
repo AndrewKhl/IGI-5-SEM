@@ -22,9 +22,9 @@ namespace WebAuction.ViewModels
 		public int Hours { get; set; }
 
 		public string DateStart { get; set; }
-		
+
+		[Required(ErrorMessage = "Укажите начальную цену")]
 		[Range(0.01, 1000000, ErrorMessage = "Цена должна быть больше 0")]
-		[Required]
 		public double StartPrice { get; set; }
 
 		public double RedemptionPrice { get; set; }

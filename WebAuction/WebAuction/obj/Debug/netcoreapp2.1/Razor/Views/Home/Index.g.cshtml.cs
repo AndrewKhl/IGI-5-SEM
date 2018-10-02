@@ -66,7 +66,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(113, 43, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c6a3621596904457aaa75a8d8dd419d9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e1376fbb8db4bdcb8c67c82b6b14fc5", async() => {
                 BeginContext(119, 30, true);
                 WriteLiteral("\r\n    <title>Аукцион</title>\r\n");
                 EndContext();
@@ -86,12 +86,12 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(158, 787, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1c51f2caf774cad8977c867e1de079c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3dc061b5995c41c6a90fe742db831749", async() => {
                 BeginContext(164, 65, true);
                 WriteLiteral("\r\n    <div class=\"d-flex justify-content-end offset-4\">\r\n        ");
                 EndContext();
                 BeginContext(229, 159, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bb93cf9de17a4461963e52cea6554b89", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "13762e38cf33495092e7bbb548758a9b", async() => {
                     BeginContext(298, 83, true);
                     WriteLiteral("\r\n            <button class=\"btn btn-dark\" type=\"submit\">New lot</button>\r\n        ");
                     EndContext();
@@ -167,7 +167,7 @@ using WebAuction.Models;
                 WriteLiteral("</td>\r\n                <td>");
                 EndContext();
                 BeginContext(840, 47, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bfa599a247db4f8f91226872c41026b9", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "053dfe7338e041cd8c66f55e30fbf6f7", async() => {
                     BeginContext(869, 14, true);
                     WriteLiteral("Сделать ставку");
                     EndContext();

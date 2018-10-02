@@ -16,11 +16,6 @@ namespace WebAuction.Controllers
 			db = context;
 		}
 
-		public IActionResult CreateLot()
-		{
-			return View();
-		}
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddOrChangeLot(ChangeLot model)
@@ -38,7 +33,7 @@ namespace WebAuction.Controllers
 						StartPrice = model.StartPrice,
 						RedemptionPrice = model.RedemptionPrice,
 						Descrition = model.Description
-						
+
 					};
 
 					if (model.DateStart != null)
@@ -60,6 +55,9 @@ namespace WebAuction.Controllers
 				}
 				//else добавить на изменение
 			}
+			else
+				ModelState.AddModelError("","Ivalid form");
+
 			return View(model);
 		}
 	}
