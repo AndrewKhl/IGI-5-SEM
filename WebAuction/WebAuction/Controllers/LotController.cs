@@ -37,7 +37,14 @@ namespace WebAuction.Controllers
 					};
 
 					if (model.DateStart != null)
+					{
 						lot.DateStart = DateTime.Parse(model.DateStart);
+						if (lot.DateStart.AddMinutes(1) < DateTime.Now)
+						{
+							ModelState.AddModelError("DateStart", "Дата начала не может быть меньше текущей даты");
+							return View(model);
+						}
+					}
 					else
 						lot.DateStart = DateTime.Now.AddMinutes(5);
 
@@ -54,9 +61,8 @@ namespace WebAuction.Controllers
 					return RedirectToAction("Index", "Home");
 				}
 				//else добавить на изменение
+
 			}
-			else
-				ModelState.AddModelError("","Ivalid form");
 
 			return View(model);
 		}

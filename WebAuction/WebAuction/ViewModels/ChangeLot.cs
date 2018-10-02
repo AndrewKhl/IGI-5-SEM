@@ -14,11 +14,11 @@ namespace WebAuction.ViewModels
 		public string Description { get; set; }
 
 		[Required(ErrorMessage = "Укажите кол-во")]
-		[Range(1, 1000000, ErrorMessage = "Кол-во должно быть больше 1")]
+		[Range(1, 1000000, ErrorMessage = "Кол-во должно быть больше 0")]
 		public int Quantity { get; set; }
 		
 		[Required(ErrorMessage = "Укажите кол-во часов на аукционе")]
-		[Range(1, 1000000, ErrorMessage = "Кол-во часов должно быть больше 1")]
+		[Range(1, 1000000, ErrorMessage = "Кол-во часов должно быть больше 0")]
 		public int Hours { get; set; }
 
 		public string DateStart { get; set; }
