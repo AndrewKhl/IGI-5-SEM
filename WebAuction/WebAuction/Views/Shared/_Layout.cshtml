@@ -27,10 +27,10 @@
         <ul>
             <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
             <li><a href="">Ставки</a></li>
-            <li><a href="">Профиль</a></li>
+            <li><form method="post"><a asp-controller="Profile" asp-action="ChangeProfile">Профиль</a></form></li>
         </ul>
     </div>
-    
+
     <div style="position:absolute; top:5vh; width:100vw">
         <nav class="navbar navbar-dark bg-warning justify-content-between">
             <a class="navbar-brand"></a>
@@ -40,7 +40,7 @@
             </form>
         </nav>
     </div>
-    
+
 
     <environment names="Development">
         <script src="~/lib/jquery/jquery.js"></script>

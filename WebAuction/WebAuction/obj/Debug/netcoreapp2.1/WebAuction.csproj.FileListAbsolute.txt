@@ -30,3 +30,4 @@ D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAu
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Lot\AddOrChangeLot.g.cshtml.cs
+D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\Razor\Views\Profile\ChangeProfile.g.cshtml.cs

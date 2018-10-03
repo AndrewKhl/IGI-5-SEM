@@ -1,0 +1,38 @@
+﻿@model WebAuction.ViewModels.ChangeProfile
+@{
+    ViewData["Title"] = "ChangeProfile";
+}
+
+<form asp-controller="Profile" asp-action="ChangeProfile" asp-anti-forgery="true">
+    <div asp-validation-summary="ModelOnly" class="list-errors offset-6"></div>
+    <div class="form-row">
+        <div class="form-group col-md-3 offset-6">
+            <label>Nickname</label>
+            <input asp-for="Nickname" class="form-control">
+            <span asp-validation-for="Nickname" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Name user</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color:red"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3 offset-6">
+            <label>Email</label>
+            <input asp-for="Email" type="email" class="form-control">
+            <span asp-validation-for="Email" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Password</label>
+            <input asp-for="Password" type="password" class="form-control">
+            <span asp-validation-for="Password" style="color:red"></span>
+        </div>
+    </div>
+
+    <div class="offset-11">
+        <input type="submit" class="btn btn-dark offset-5" value="Save" style="width:4vw;" />
+    </div>
+</form>
+
