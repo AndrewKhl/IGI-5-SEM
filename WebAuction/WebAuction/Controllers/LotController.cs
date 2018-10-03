@@ -16,16 +16,37 @@ namespace WebAuction.Controllers
 			db = context;
 		}
 
+		[HttpGet]
+		public IActionResult AddOrChangeLot(int id)
+		{
+			Lot currentLot = db.Lots.FirstOrDefault(l => l.Id == id);
+			ChangeLot model = new ChangeLot
+			{
+				NameLot = currentLot.NameLot,
+				Description = currentLot.Descrition,
+				Quantity = currentLot.Quantity,
+				StartPrice = currentLot.StartPrice,
+				RedemptionPrice = currentLot.RedemptionPrice,
+				DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm"),
+				Id = currentLot.Id
+			};
+			TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
+			model.Hours = diff.Hours;
+
+			ViewData["DateStart"] = model.DateStart;
+
+			return View(model);
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddOrChangeLot(ChangeLot model)
 		{
 			if (ModelState.IsValid)
 			{
-				Lot lot = db.Lots.FirstOrDefault(l => l.Id == model.Id);
+				var lot = db.Lots.FirstOrDefault(l => l.Id == model.Id);
 				if (lot == null)
 				{
-					// добавляем пользователя в бд
 					lot = new Lot
 					{
 						NameLot = model.NameLot,
@@ -57,10 +78,30 @@ namespace WebAuction.Controllers
 					db.Lots.Add(lot);
 
 					await db.SaveChangesAsync();
-
 					return RedirectToAction("Index", "Home");
 				}
-				//else добавить на изменение
+				else
+				{
+					lot.NameLot = model.NameLot;
+					lot.Descrition = model.Description;
+					lot.Quantity = model.Quantity;
+					lot.StartPrice = model.StartPrice;
+					lot.RedemptionPrice = model.RedemptionPrice;
+					if (model.DateStart == null)
+						lot.DateStart = DateTime.Now;
+					else
+						lot.DateStart = DateTime.Parse(model.DateStart);
+					if (lot.DateStart.AddMinutes(1) < DateTime.Now)
+					{
+						ModelState.AddModelError("DateStart", "Дата начала не может быть меньше текущей даты");
+						return View(model);
+					}
+
+					lot.DateEnd = lot.DateStart.AddHours(model.Hours);
+
+					await db.SaveChangesAsync();
+					return RedirectToAction("Index", "Home");
+				}
 
 			}
 

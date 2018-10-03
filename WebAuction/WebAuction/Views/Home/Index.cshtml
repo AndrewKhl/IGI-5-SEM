@@ -23,6 +23,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">StartPrice</th>
                 <th scope="col">RedemptionPrice</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,11 @@
                     <td>@lot.NameLot</td>
                     <td>@lot.StartPrice</td>
                     <td>@lot.RedemptionPrice</td>
+                    <td>
+                        <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-route-id="@lot.Id" method="get">
+                            <button type="submit">!</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
