@@ -14,9 +14,15 @@ namespace WebAuction.Controllers
 		}
 
 		[Authorize]
-		public IActionResult Index()
+		public IActionResult Index(int id = 0)
 		{
 			return View(db.Lots.ToList());
+		}
+
+		[Authorize]
+		public IActionResult Users()
+		{
+			return View(db.Users.ToList());
 		}
 	}
 }

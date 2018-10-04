@@ -18,7 +18,7 @@
             <button class="btn btn-dark" style="margin:5px">Logout</button>
         </form>
     </div>
-
+    
     <div style="position:absolute; left:18vw; top:11vh; width:81vw">
         @RenderBody()
     </div>
@@ -26,8 +26,12 @@
     <div class="sidebar-menu">
         <ul>
             <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
-            <li><a href="">Ставки</a></li>
-            <li><form method="post"><a asp-controller="Profile" asp-action="ChangeProfile">Профиль</a></form></li>
+            <li><a>Ставки</a></li>
+            <li><a asp-controller="Profile" asp-action="ChangeProfile">Профиль</a></li>
+            @if (User.IsInRole("admin"))
+            {
+                <li><a asp-controller="Home" asp-action="Users">Пользователи</a></li>
+            }    
         </ul>
     </div>
 
