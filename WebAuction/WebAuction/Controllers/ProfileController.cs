@@ -18,9 +18,9 @@ namespace WebAuction.Controllers
 			db = context;
 		}
 		[HttpGet]
-		public IActionResult ChangeProfile()
+		public IActionResult ChangeProfile(int id = 0)
 		{
-			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+			User currentUser = id == 0 ? db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name) : db.Users.FirstOrDefault(u => u.Id == id);
 			ChangeProfile model = new ChangeProfile
 			{
 				Name = currentUser.Name,
