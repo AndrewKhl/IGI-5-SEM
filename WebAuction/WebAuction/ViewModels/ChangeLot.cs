@@ -33,6 +33,6 @@ namespace WebAuction.ViewModels
 
 		public int Id { get; set; }
 
-		public double Bid { get; set; }
+		public double MaxBid { get; set; }
 	}
 }

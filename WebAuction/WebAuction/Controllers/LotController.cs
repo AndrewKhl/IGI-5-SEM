@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebAuction.Models;
 using WebAuction.ViewModels;
 
@@ -11,6 +12,7 @@ namespace WebAuction.Controllers
 	public class LotController : Controller
 	{
 		private AuctionContext db;
+		private static Lot currentLot;
 		public LotController(AuctionContext context)
 		{
 			db = context;
@@ -19,7 +21,8 @@ namespace WebAuction.Controllers
 		[HttpGet]
 		public IActionResult AddOrChangeLot(int id)
 		{
-			Lot currentLot = db.Lots.FirstOrDefault(l => l.Id == id);
+			CountScore();
+			currentLot = db.Lots.FirstOrDefault(l => l.Id == id);
 			ChangeLot model = new ChangeLot
 			{
 				NameLot = currentLot.NameLot,
@@ -32,6 +35,7 @@ namespace WebAuction.Controllers
 			};
 			TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
 			model.Hours = diff.Hours;
+			model.MaxBid = GetMaxBid();
 
 			ViewData["DateStart"] = model.DateStart;
 
@@ -42,12 +46,13 @@ namespace WebAuction.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddOrChangeLot(ChangeLot model)
 		{
+			CountScore();
 			if (ModelState.IsValid)
 			{
-				var lot = db.Lots.FirstOrDefault(l => l.Id == model.Id);
-				if (lot == null)
+				currentLot = db.Lots.FirstOrDefault(l => l.Id == model.Id);
+				if (currentLot == null)
 				{
-					lot = new Lot
+					currentLot = new Lot
 					{
 						NameLot = model.NameLot,
 						Quantity = model.Quantity,
@@ -59,45 +64,45 @@ namespace WebAuction.Controllers
 
 					if (model.DateStart != null)
 					{
-						lot.DateStart = DateTime.Parse(model.DateStart);
-						if (lot.DateStart.AddMinutes(1) < DateTime.Now)
+						currentLot.DateStart = DateTime.Parse(model.DateStart);
+						if (currentLot.DateStart.AddMinutes(1) < DateTime.Now)
 						{
 							ModelState.AddModelError("DateStart", "Дата начала не может быть меньше текущей даты");
 							return View(model);
 						}
 					}
 					else
-						lot.DateStart = DateTime.Now.AddMinutes(5);
+						currentLot.DateStart = DateTime.Now.AddMinutes(5);
 
-					lot.DateEnd = lot.DateStart.AddHours(model.Hours);
+					currentLot.DateEnd = currentLot.DateStart.AddHours(model.Hours);
 
 
 					User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
-					lot.HostId = currentUser.Id;
+					currentLot.HostId = currentUser.Id;
 
-					db.Lots.Add(lot);
+					db.Lots.Add(currentLot);
 
 					await db.SaveChangesAsync();
 					return RedirectToAction("Index", "Home");
 				}
 				else
 				{
-					lot.NameLot = model.NameLot;
-					lot.Descrition = model.Description;
-					lot.Quantity = model.Quantity;
-					lot.StartPrice = model.StartPrice;
-					lot.RedemptionPrice = model.RedemptionPrice;
+					currentLot.NameLot = model.NameLot;
+					currentLot.Descrition = model.Description;
+					currentLot.Quantity = model.Quantity;
+					currentLot.StartPrice = model.StartPrice;
+					currentLot.RedemptionPrice = model.RedemptionPrice;
 					if (model.DateStart == null)
-						lot.DateStart = DateTime.Now;
+						currentLot.DateStart = DateTime.Now;
 					else
-						lot.DateStart = DateTime.Parse(model.DateStart);
-					if (lot.DateStart.AddMinutes(1) < DateTime.Now)
+						currentLot.DateStart = DateTime.Parse(model.DateStart);
+					if (currentLot.DateStart.AddMinutes(1) < DateTime.Now)
 					{
 						ModelState.AddModelError("DateStart", "Дата начала не может быть меньше текущей даты");
 						return View(model);
 					}
 
-					lot.DateEnd = lot.DateStart.AddHours(model.Hours);
+					currentLot.DateEnd = currentLot.DateStart.AddHours(model.Hours);
 
 					await db.SaveChangesAsync();
 					return RedirectToAction("Index", "Home");
@@ -107,29 +112,65 @@ namespace WebAuction.Controllers
 			return View(model);
 		}
 
-		public IActionResult DoBid(int id, double sum)
+		[HttpPost]
+		public JsonResult DoBid(string sum)
 		{
-			var bidsThisLot = db.Bids.Where(l => l.Lot_id == id);
+			double max = GetMaxBid();
 
-			double max = bidsThisLot.Max(l => l.Sum);
+			double value = Convert.ToDouble(sum.Replace('.', ','));
 
-			if (max < sum)
+			if (max < value)
 			{
-				User currentUser = db.Users.FirstOrDefault(u => u.Name == User.Identity.Name);
+
+				Bid bid = db.Bids.FirstOrDefault(b => b.Sum == max && b.Lot_id == currentLot.Id);
+				if (bid != null)
+				{
+					User oldBidHost = db.Users.FirstOrDefault(u => u.Id == bid.Host_id);
+					oldBidHost.Cash += bid.Sum;
+				}
+
+				db.SaveChanges();
+
+				User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+				if (currentUser.Cash < value)
+					return Json(-1);
 				Bid newBid = new Bid
 				{
-					Sum = sum,
+					Sum = value,
 					Date_bid = DateTime.Now,
 					Host_id = currentUser.Id,
-					Lot_id = id
+					Lot_id = currentLot.Id
 				};
-				return RedirectToAction("Index", "Home");
+
+				currentUser.Cash -= value;
+
+				db.Bids.Add(newBid);
+
+				db.SaveChanges();
+
+				return Json(sum + ' ' + currentUser.Cash);
 			}
 			else
-			{
-				ModelState.AddModelError("", "Сумма ставки слишком мала");
-				return RedirectToAction("AddOrChangeLot", "Lot", id);
-			}
+				return Json(-2);
+			
 		}
+
+		public JsonResult GetBid()
+		{
+			return Json(GetMaxBid());
+		}
+
+		private double GetMaxBid()
+		{
+			var bids = db.Bids.Where(b => b.Lot_id == currentLot.Id);
+			return bids.Count() != 0 ? bids.Max(b => b.Sum) : 0;
+		}
+
+		public void CountScore()
+		{
+			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+			ViewBag.Score = currentUser.Cash;	
+		}
+
 	}
 }
