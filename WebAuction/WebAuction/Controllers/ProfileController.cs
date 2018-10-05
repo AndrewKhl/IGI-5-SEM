@@ -73,7 +73,7 @@ namespace WebAuction.Controllers
 		public JsonResult AddCash(string sum)
 		{
 			var changeUser = db.Users.FirstOrDefault(u => u.Email == currentProfile.Email);
-			changeUser.Cash += Convert.ToDouble(sum);
+			changeUser.Cash += Convert.ToDouble(sum.Replace('.', ','));
 			db.SaveChanges();
 			CountScore();
 			return Json(changeUser.Cash);

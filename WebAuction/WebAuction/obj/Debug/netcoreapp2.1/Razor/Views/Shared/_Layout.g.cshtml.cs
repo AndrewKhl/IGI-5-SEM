@@ -76,7 +76,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(25, 361, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "57111761e1a9480a8e31f47a722317de", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "afb6dd0802d340a9a85843b27e3e3ef0", async() => {
                 BeginContext(31, 121, true);
                 WriteLiteral("\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>");
                 EndContext();
@@ -91,12 +91,12 @@ using WebAuction.Models;
                 WriteLiteral("</title>\r\n    ");
                 EndContext();
                 BeginContext(184, 191, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("environment", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "50de4165b990474c84c8bb71167ad031", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("environment", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2175b68da14e41cab48c2ae726ffa474", async() => {
                     BeginContext(217, 10, true);
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(227, 71, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "a37b79e99516446f8c97bab4e6ab70c5", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "8931100f834e457c9f4913d861ca33d0", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -115,7 +115,7 @@ using WebAuction.Models;
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(308, 47, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ad7339d6989b401f9238c47691c74e7c", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2c5bc4632aa641ddaa030f6f1153d6cb", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -166,7 +166,7 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(388, 1715, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "52f6c7d616de4e13a7562aec7f880a50", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "047549e1a3534299b40ea975ed171f6e", async() => {
                 BeginContext(394, 118, true);
                 WriteLiteral("\r\n    <!--меню-->\r\n    <div style=\"position:absolute; left:70vw; width:30vw;\">\r\n        <span class=\"greeting\">Hello, ");
                 EndContext();
@@ -181,7 +181,7 @@ using WebAuction.Models;
                 WriteLiteral("</span>\r\n        ");
                 EndContext();
                 BeginContext(548, 185, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1dc020c28b994ebea49591deba15de2a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c81a48faf422482ea31c69eaa3d9ac7a", async() => {
                     BeginContext(639, 87, true);
                     WriteLiteral("\r\n            <button class=\"btn btn-dark\" style=\"margin:5px\">Logout</button>\r\n        ");
                     EndContext();
@@ -218,7 +218,7 @@ using WebAuction.Models;
                 WriteLiteral("\r\n    </div>\r\n\r\n    <div class=\"sidebar-menu\">\r\n        <ul>\r\n            <li>");
                 EndContext();
                 BeginContext(922, 52, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0f70bb877e074fd8899d41d7823522d8", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b06e04e4cc8f4f1db6c7a3dd167875e1", async() => {
                     BeginContext(966, 4, true);
                     WriteLiteral("Лоты");
                     EndContext();
@@ -242,7 +242,7 @@ using WebAuction.Models;
                 WriteLiteral("</li>\r\n            <li><a>Ставки</a></li>\r\n            <li>");
                 EndContext();
                 BeginContext(1033, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65f311e006cf4706870ff8a1d4801b8e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10bf2894f1c5435a869d8cc763f95242", async() => {
                     BeginContext(1088, 7, true);
                     WriteLiteral("Профиль");
                     EndContext();
@@ -275,7 +275,7 @@ using WebAuction.Models;
                 WriteLiteral("                <li>");
                 EndContext();
                 BeginContext(1183, 60, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4848a028b1c34026b59a337b77e7c6af", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b17a077509bf4029b7d4809797173612", async() => {
                     BeginContext(1227, 12, true);
                     WriteLiteral("Пользователи");
                     EndContext();
@@ -307,7 +307,7 @@ using WebAuction.Models;
                 WriteLiteral("        </ul>\r\n    </div>\r\n\r\n    <div style=\"position:absolute; top:5vh; width:100vw\">\r\n        <nav class=\"navbar navbar-dark bg-warning justify-content-between\">\r\n            ");
                 EndContext();
                 BeginContext(1446, 253, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b0dd530bb60841b2ad1d54c3da4d068b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41aacb565d9e43a2a887f1bd4883d1b1", async() => {
                     BeginContext(1487, 205, true);
                     WriteLiteral("\r\n                <input class=\"form-control mr-sm-2 col-6\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n                <button class=\"btn btn-dark\" type=\"submit\">Search</button>\r\n            ");
                     EndContext();
@@ -340,12 +340,12 @@ using WebAuction.Models;
                 WriteLiteral(" $</h6>\r\n            </div>      \r\n        </nav>\r\n    </div>\r\n\r\n\r\n    ");
                 EndContext();
                 BeginContext(1843, 251, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("environment", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5e840a13331c460c89ec1570e96cf43f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("environment", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ba2ea3b6928f4324a2063227344433c8", async() => {
                     BeginContext(1876, 10, true);
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(1886, 46, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "48672081dd0746dd8ce4ec35dc3ff5c0", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a83d091c40045a39bb7b67803c12906", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -363,7 +363,7 @@ using WebAuction.Models;
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(1942, 60, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fab82d1a37104cf9949734cdc1a9c05c", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "09a8906428f34e67be8229c6f6970fe1", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -381,7 +381,7 @@ using WebAuction.Models;
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(2012, 62, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3073803be85f498a92a83e7e727da1e0", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fb837ecc716a4e65a35f82d6e9281dee", async() => {
                     }
                     );
                     __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

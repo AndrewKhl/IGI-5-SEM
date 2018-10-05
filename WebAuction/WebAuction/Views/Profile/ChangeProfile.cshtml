@@ -32,27 +32,29 @@
     </div>
 
     
-    <input type="text" name="name" id="money" />
-    <input type='button' value='Add' id="submit" onclick="AddCash()"/>
+    <input type="text" name="name" id="money" min="1"/>
+    <input type='button' value='Add' id="submit" onclick="AddCash()" />
     <div id="results">
         <h5>@Model.Cash $</h5>
     </div> 
 
     <script>
         function AddCash() {
-            $.ajax({
-                url: '@Url.Action("AddCash", "Profile")',
-                type: "POST",
-                data: "sum=" + $("#money").val(),
-                success: function (response) {
-                    $("#results").empty();
-                    $("#results").append("<h5>" + response + " $</h5>");
-                    if ('@Model.Nickname' == '@User.Identity.Name') {
-                        $("#ScoreProfile").empty();
-                        $("#ScoreProfile").append("<h6>" + response + " $ </h6>");
-                    }          
-                }
-            });
+            if (parseFloat($("#money").val()) > 0.0) {
+                $.ajax({
+                    url: '@Url.Action("AddCash", "Profile")',
+                    type: "POST",
+                    data: "sum=" + $("#money").val(),
+                    success: function (response) {
+                        $("#results").empty();
+                        $("#results").append("<h5>" + response + " $</h5>");
+                        if ('@Model.Nickname' == '@User.Identity.Name') {
+                            $("#ScoreProfile").empty();
+                            $("#ScoreProfile").append("<h6>" + response + " $ </h6>");
+                        }
+                    }
+                });
+            }
         }
     </script>
 
