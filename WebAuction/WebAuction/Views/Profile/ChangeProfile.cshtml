@@ -31,13 +31,15 @@
         </div>
     </div>
 
+    <div class="form-inline offset-8">
+        <h5 class="mx-1">Score: </h5>
+        <div id="results" class="mx-1"><h5>@Model.Cash $</h5></div>
+        <div class="ml-10" style="position:relative; left:11px">
+            <input type="text" name="name" id="money" min="1" class="form-control mx-4" />
+            <input type="submit" class="btn btn-dark" value="Add" style="width:4vw; left:10%" onclick="AddCash()" />
+        </div>
+    </div>
     
-    <input type="text" name="name" id="money" min="1"/>
-    <input type='button' value='Add' id="submit" onclick="AddCash()" />
-    <div id="results">
-        <h5>@Model.Cash $</h5>
-    </div> 
-
     <script>
         function AddCash() {
             if (parseFloat($("#money").val()) > 0.0) {
@@ -50,7 +52,7 @@
                         $("#results").append("<h5>" + response + " $</h5>");
                         if ('@Model.Nickname' == '@User.Identity.Name') {
                             $("#ScoreProfile").empty();
-                            $("#ScoreProfile").append("<h6>" + response + " $ </h6>");
+                            $("#ScoreProfile").append("<h5>" + response + " $ </h5>");
                         }
                     }
                 });
@@ -59,7 +61,7 @@
     </script>
 
     <div class="offset-11">
-        <input type="submit" class="btn btn-dark offset-5" value="Save" style="width:4vw;" />
+        <input type="submit" class="btn btn-dark offset-5 mt-2" value="Save" style="width:4vw;" />
     </div>
 </form>
 
