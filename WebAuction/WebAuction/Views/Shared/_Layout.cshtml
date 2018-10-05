@@ -37,11 +37,13 @@
 
     <div style="position:absolute; top:5vh; width:100vw">
         <nav class="navbar navbar-dark bg-warning justify-content-between">
-            <a class="navbar-brand"></a>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline offset-2 col-4">
+                <input class="form-control mr-sm-2 col-6" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-dark" type="submit">Search</button>
             </form>
+            <div id="ScoreProfile">
+                <h6>@ViewBag.Score $</h6>
+            </div>      
         </nav>
     </div>
 

@@ -57,13 +57,11 @@
 </form>
 
 
-
-
 <div class="form-row">
-    <div class="form-inline col-md-2">
-        <input type="number" class="form-control col-md-4" />
-        <input type="button" class="btn btn-dark offset-1" value="Do bid" style="width:4vw">
-    </div>
+    <form class="form-inline col-md-2" asp-controller="Lot" asp-action="DoBid">
+        <input type="number" class="form-control col-md-4" asp-for="Bid"/>
+        <button type="submit" class="btn btn-dark offset-1" style="width:4vw" asp-route-id="@Model.Id" asp-route-sum="@Model.Bid">Do Bid</button>
+    </form>
     <input type="button" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
 
 </div>

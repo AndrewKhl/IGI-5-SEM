@@ -31,6 +31,31 @@
         </div>
     </div>
 
+    
+    <input type="text" name="name" id="money" />
+    <input type='button' value='Add' id="submit" onclick="AddCash()"/>
+    <div id="results">
+        <h5>@Model.Cash $</h5>
+    </div> 
+
+    <script>
+        function AddCash() {
+            $.ajax({
+                url: '@Url.Action("AddCash", "Profile")',
+                type: "POST",
+                data: "sum=" + $("#money").val(),
+                success: function (response) {
+                    $("#results").empty();
+                    $("#results").append("<h5>" + response + " $</h5>");
+                    if ('@Model.Nickname' == '@User.Identity.Name') {
+                        $("#ScoreProfile").empty();
+                        $("#ScoreProfile").append("<h6>" + response + " $ </h6>");
+                    }          
+                }
+            });
+        }
+    </script>
+
     <div class="offset-11">
         <input type="submit" class="btn btn-dark offset-5" value="Save" style="width:4vw;" />
     </div>

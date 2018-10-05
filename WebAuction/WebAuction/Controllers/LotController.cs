@@ -104,8 +104,32 @@ namespace WebAuction.Controllers
 				}
 
 			}
-
 			return View(model);
+		}
+
+		public IActionResult DoBid(int id, double sum)
+		{
+			var bidsThisLot = db.Bids.Where(l => l.Lot_id == id);
+
+			double max = bidsThisLot.Max(l => l.Sum);
+
+			if (max < sum)
+			{
+				User currentUser = db.Users.FirstOrDefault(u => u.Name == User.Identity.Name);
+				Bid newBid = new Bid
+				{
+					Sum = sum,
+					Date_bid = DateTime.Now,
+					Host_id = currentUser.Id,
+					Lot_id = id
+				};
+				return RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				ModelState.AddModelError("", "Сумма ставки слишком мала");
+				return RedirectToAction("AddOrChangeLot", "Lot", id);
+			}
 		}
 	}
 }

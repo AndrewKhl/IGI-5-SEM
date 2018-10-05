@@ -17,5 +17,7 @@ namespace WebAuction.ViewModels
 
 		[Required(ErrorMessage = "Не указан Email")]
 		public string Email { get; set; }
+
+		public double Cash { get; set; }
 	}
 }

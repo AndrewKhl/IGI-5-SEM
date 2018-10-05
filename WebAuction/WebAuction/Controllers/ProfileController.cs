@@ -12,27 +12,33 @@ namespace WebAuction.Controllers
     public class ProfileController : Controller
     {
 		private AuctionContext db;
+		private static User currentProfile;
 
 		public ProfileController(AuctionContext context)
 		{
 			db = context;
 		}
+
 		[HttpGet]
 		public IActionResult ChangeProfile(int id = 0)
 		{
-			User currentUser = id == 0 ? db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name) : db.Users.FirstOrDefault(u => u.Id == id);
+			currentProfile = id == 0 ? db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name) : db.Users.FirstOrDefault(u => u.Id == id);
+			CountScore();
 			ChangeProfile model = new ChangeProfile
 			{
-				Name = currentUser.Name,
-				Nickname = currentUser.Nickname,
-				Email = currentUser.Email
+				Name = currentProfile.Name,
+				Nickname = currentProfile.Nickname,
+				Email = currentProfile.Email,
+				Cash = currentProfile.Cash
 			};
 			return View(model);
 		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> ChangeProfile(ChangeProfile model)
 		{
+			CountScore();
 			if (ModelState.IsValid)
 			{
 				var changeUser = db.Users.FirstOrDefault(u => u.Email == model.Email);
@@ -50,6 +56,27 @@ namespace WebAuction.Controllers
 			}
 
 			return View(model);
+		}
+
+		public void CountScore()
+		{
+			if (currentProfile.Nickname == User.Identity.Name)
+				ViewBag.Score = currentProfile.Cash;
+			else
+			{
+				User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+				ViewBag.Score = currentUser.Cash;
+			}
+		}
+
+		[HttpPost]
+		public JsonResult AddCash(string sum)
+		{
+			var changeUser = db.Users.FirstOrDefault(u => u.Email == currentProfile.Email);
+			changeUser.Cash += Convert.ToDouble(sum);
+			db.SaveChanges();
+			CountScore();
+			return Json(changeUser.Cash);
 		}
 	}
 }

@@ -16,13 +16,21 @@ namespace WebAuction.Controllers
 		[Authorize]
 		public IActionResult Index(int id = 0)
 		{
+			CountScore();
 			return View(db.Lots.ToList());
 		}
 
 		[Authorize]
 		public IActionResult Users()
 		{
+			CountScore();
 			return View(db.Users.ToList());
+		}
+
+		public void CountScore()
+		{
+			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+			ViewBag.Score = currentUser.Cash;
 		}
 	}
 }
