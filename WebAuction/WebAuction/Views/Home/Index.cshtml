@@ -27,23 +27,47 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="body-table">
             @foreach (var lot in Model)
             {
-                <tr>
-                    <td>@lot.Id</td>
-                    <td>@lot.NameLot</td>
-                    <td>@lot.StartPrice</td>
-                    <td>@lot.RedemptionPrice</td>
-                    <td>@lot.Status</td>
-                    <td>
-                        <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-route-id="@lot.Id" method="get">
-                            <button type="submit">!</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>@lot.Id</td>
+                <td>@lot.NameLot</td>
+                <td>@lot.StartPrice</td>
+                <td>@lot.RedemptionPrice</td>
+                <td>@lot.Status</td>
+                <td>
+                    <a href="/Lot/AddOrChangeLot/@lot.Id/">!</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
+    <input type="submit" class="btn btn-dark ml-3" value="Refresh" style="width:4vw; left:10%" onclick="Refresh()" />
+        <script>
+            $(document).ready(function () {
+                setInterval(function () {
+                    $.ajax({
+                        url: '@Url.Action("Refresh", "Home")',
+                        type: "GET",
+                        success: function (response) {
+                            response = JSON.parse(response);
+                            $("#body-table").empty();
+                            for (var i = 0; i < response.length; i++) {
+                                console.log(response[i]);
+                                $("#body-table").append("<tr>");
+                                $("#body-table").append("<td>" + response[i].Id + "</td>");
+                                $("#body-table").append("<td>" + response[i].NameLot + "</td>");
+                                $("#body-table").append("<td>" + response[i].StartPrice + "</td>");
+                                $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
+                                $("#body-table").append("<td>" + response[i].Status + "</td>");
+                                $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">!</a></td>");
+                                $("#body-table").append("</tr>");
+                            }
+                        }
+                    });
+                }, 60000);
+            });
+      </script>
 </body>
 </html>
