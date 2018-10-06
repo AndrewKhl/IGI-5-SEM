@@ -112,6 +112,55 @@ namespace WebAuction.Controllers
 			return View(model);
 		}
 
+
+		public bool BuyLot(int id_lot, double money,string nickname)
+		{
+			Lot lot = db.Lots.FirstOrDefault(l => l.Id == id_lot);
+			User buyer = db.Users.FirstOrDefault(u => u.Nickname == nickname);
+			User seller = db.Users.FirstOrDefault(u => u.Id == lot.Id);
+
+			double max = GetMaxBid();
+			Bid bid = db.Bids.FirstOrDefault(b => b.LotId == lot.Id && max == b.Sum);
+
+			if (bid != null)
+			{
+				double score = bid.HostId == buyer.Id ? buyer.Cash + bid.Sum : buyer.Cash;
+
+				if (score < money)
+					return false;
+
+				if (bid.HostId == buyer.Id)
+				{
+					buyer.Cash += bid.Sum;
+				}
+				else
+				{
+					User hostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
+					hostBid.Cash += bid.Sum;
+				}
+
+				db.Bids.Remove(bid);
+			}
+
+			buyer.Cash -= money;
+			seller.Cash += money;
+			lot.HostId = buyer.Id;
+			lot.Status = "sell";
+
+			db.SaveChanges();
+			return true;
+		}
+
+		[HttpPost]
+		public IActionResult BuyLot()
+		{
+			if (BuyLot(currentLot.Id, currentLot.RedemptionPrice, User.Identity.Name))
+				return RedirectToAction("Index", "Home");
+			else
+				return AddOrChangeLot(currentLot.Id);
+		}
+
+
 		[HttpPost]
 		public JsonResult DoBid(string sum)
 		{
@@ -122,10 +171,10 @@ namespace WebAuction.Controllers
 			if (max < value)
 			{
 
-				Bid bid = db.Bids.FirstOrDefault(b => b.Sum == max && b.Lot_id == currentLot.Id);
+				Bid bid = db.Bids.FirstOrDefault(b => b.Sum == max && b.LotId == currentLot.Id);
 				if (bid != null)
 				{
-					User oldBidHost = db.Users.FirstOrDefault(u => u.Id == bid.Host_id);
+					User oldBidHost = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
 					oldBidHost.Cash += bid.Sum;
 				}
 
@@ -137,14 +186,15 @@ namespace WebAuction.Controllers
 				Bid newBid = new Bid
 				{
 					Sum = value,
-					Date_bid = DateTime.Now,
-					Host_id = currentUser.Id,
-					Lot_id = currentLot.Id
+					DateBid = DateTime.Now,
+					HostId = currentUser.Id,
+					LotId = currentLot.Id
 				};
 
 				currentUser.Cash -= value;
 
 				db.Bids.Add(newBid);
+				db.Bids.Remove(bid);
 
 				db.SaveChanges();
 
@@ -162,7 +212,7 @@ namespace WebAuction.Controllers
 
 		private double GetMaxBid()
 		{
-			var bids = db.Bids.Where(b => b.Lot_id == currentLot.Id);
+			var bids = db.Bids.Where(b => b.LotId == currentLot.Id);
 			return bids.Count() != 0 ? bids.Max(b => b.Sum) : 0;
 		}
 
@@ -171,6 +221,7 @@ namespace WebAuction.Controllers
 			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
 			ViewBag.Score = currentUser.Cash;	
 		}
+
 
 	}
 }

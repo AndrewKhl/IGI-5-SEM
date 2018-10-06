@@ -63,7 +63,9 @@
         <button type="submit" class="btn btn-dark offset-1" style="width:4vw" onclick="DoBid()">Do Bid</button>
 
     </div>
-    @*<input type="button" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />*@
+    <form asp-controller="Lot" asp-action="BuyLot">
+        <input type="submit" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
+    </form>
 </div>
 
 
