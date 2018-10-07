@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebAuction.Models;   // пространство имен моделей
-using Microsoft.EntityFrameworkCore; // пространство имен EntityFramework
+using WebAuction.Models;   
+using Microsoft.EntityFrameworkCore; 
 using Microsoft.AspNetCore.Authentication.Cookies;
+using WebAuction.Hubs;
 
 namespace WebAuction
 {
@@ -27,8 +28,9 @@ namespace WebAuction
 				{
 					options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
 				});
-
+			
 			services.AddMvc();
+			services.AddSignalR();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -44,6 +46,11 @@ namespace WebAuction
 
 			app.UseStaticFiles();
 			app.UseAuthentication();
+
+			app.UseSignalR(routes =>
+			{
+				routes.MapHub<PriceHub>("/price");
+			});
 
 			app.UseMvc(routes =>
 			{

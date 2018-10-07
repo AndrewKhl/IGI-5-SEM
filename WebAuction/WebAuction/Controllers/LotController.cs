@@ -176,6 +176,7 @@ namespace WebAuction.Controllers
 				{
 					User oldBidHost = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
 					oldBidHost.Cash += bid.Sum;
+					db.Bids.Remove(bid);
 				}
 
 				db.SaveChanges();
@@ -194,7 +195,7 @@ namespace WebAuction.Controllers
 				currentUser.Cash -= value;
 
 				db.Bids.Add(newBid);
-				db.Bids.Remove(bid);
+				
 
 				db.SaveChanges();
 

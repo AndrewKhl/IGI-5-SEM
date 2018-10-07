@@ -65,7 +65,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(113, 43, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9dcd16751bc24616832aa6f73db19822", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2216303b38f5460e89199a3b2e232c24", async() => {
                 BeginContext(119, 30, true);
                 WriteLiteral("\r\n    <title>Аукцион</title>\r\n");
                 EndContext();
@@ -85,12 +85,12 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(158, 2712, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7ddfc846f84f4992a55a2fd4758b168e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6d6b3af97cf14ae7a580058628f9f4ca", async() => {
                 BeginContext(164, 65, true);
                 WriteLiteral("\r\n    <div class=\"d-flex justify-content-end offset-4\">\r\n        ");
                 EndContext();
                 BeginContext(229, 159, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dbfdc3c09f7447b694200710d27e19ff", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "10ca4fd4d5664d9f9f0da27c218c9a40", async() => {
                     BeginContext(298, 83, true);
                     WriteLiteral("\r\n            <button class=\"btn btn-dark\" type=\"submit\">New lot</button>\r\n        ");
                     EndContext();
