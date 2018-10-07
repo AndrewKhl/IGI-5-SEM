@@ -16,11 +16,13 @@
     </div>
 
     <h3>Lots</h3>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="view-all-lots">
-        <label class="form-check-label">View all lots</label>
-    </div>
-
+    @if (User.IsInRole("admin"))
+    {
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="view-all-lots">
+            <label class="form-check-label">View all lots</label>
+        </div>
+    }
     <table class="table">
         <thead class="thead-dark">
             <tr>
