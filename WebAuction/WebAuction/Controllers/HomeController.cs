@@ -47,5 +47,6 @@ namespace WebAuction.Controllers
 				return Json(Encoding.Default.GetString(fs.ToArray()));
 			}
 		}
+
 	}
 }

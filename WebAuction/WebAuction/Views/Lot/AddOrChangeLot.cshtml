@@ -106,42 +106,31 @@
 <script>
     var connection = new signalR.HubConnectionBuilder().withUrl("/price").build();;
 
-    connection.on("Send", function (data) {
+    connection.on("Send", function (data, name) {
         $("#MaxBid").empty();
-        $("#MaxBid").text(data);
+        $("#MaxBid").text(name + ": " + data);
     });
 
     document.getElementById("btnBid").addEventListener("click", function (e) {
-            var money = parseFloat($("#money").val());
-            if (money >= parseFloat('@Model.StartPrice')) {
-                    if (money > parseFloat(0)) {
-                        $.ajax({
-                            url: '@Url.Action("DoBid", "Lot")',
-                            type: "POST",
-                            data: "sum=" + $("#money").val(),
-                            success: function (response) {
-                                if (response == '-1')
-                                    alert('Недостаточно средст на счёте');
-                                else
-                                    if (response == '-2')
-                                        alert('Ставка слишком мала');
-                                    else {
-                                        var val = response.split(' ');
-                                        connection.invoke("Send", val[0]);
-                                        $("#MaxBid").text(val[0]);
-                                        $("#ScoreProfile").empty();
-                                        $("#ScoreProfile").append("<h5>" + val[1] + " $ </h5>");
-                                    }
-                            }
-                        });
-                    }
-                    else
-                        alert('Введите положительную сумму');
-            }
-            else
-            alert('Ставка слишком мала');   
-        
-        e.preventDefault();
+        //var money = parseFloat($("#money").val()); 
+        $.ajax({
+            url: '@Url.Action("DoBid", "Lot")',
+            type: "POST",
+            data: "sum=" + $("#money").val(),
+            success: function (response) {
+                var val = JSON.parse(response);
+                if (val.Status == 0) {
+                    connection.invoke("Send", val.Score, val.Name);
+                    
+                    $("#ScoreProfile").empty();
+                    $("#ScoreProfile").append("<h5>" + val.Cash + " $ </h5>");
+                }
+                else {
+                    alert(val.Message);
+                }
+            },
+        });
+    e.preventDefault();
     });
 
     connection.start();

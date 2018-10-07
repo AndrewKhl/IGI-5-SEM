@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebAuction.Models;
 using WebAuction.ViewModels;
 
+
 namespace WebAuction.Controllers
 {
 	public class LotController : Controller
@@ -30,7 +31,7 @@ namespace WebAuction.Controllers
 				Quantity = currentLot.Quantity,
 				StartPrice = currentLot.StartPrice,
 				RedemptionPrice = currentLot.RedemptionPrice,
-				DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm"),
+				DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm:ss"),
 				Id = currentLot.Id
 			};
 			TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
@@ -168,22 +169,26 @@ namespace WebAuction.Controllers
 
 			double value = Convert.ToDouble(sum.Replace('.', ','));
 
+			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+
 			if (max < value)
 			{
 
 				Bid bid = db.Bids.FirstOrDefault(b => b.Sum == max && b.LotId == currentLot.Id);
+
+				double score = currentUser.Cash;
+
 				if (bid != null)
 				{
 					User oldBidHost = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
 					oldBidHost.Cash += bid.Sum;
-					db.Bids.Remove(bid);
+					if (oldBidHost.Id == currentUser.Id)
+						score += bid.Sum;
 				}
 
-				db.SaveChanges();
+				if (score < value)
+					return Json("{ \"Status\": \"1\", \"Message\": \"Недостаточно средств!\"}");
 
-				User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
-				if (currentUser.Cash < value)
-					return Json(-1);
 				Bid newBid = new Bid
 				{
 					Sum = value,
@@ -195,15 +200,16 @@ namespace WebAuction.Controllers
 				currentUser.Cash -= value;
 
 				db.Bids.Add(newBid);
-				
+				if (bid != null)
+					db.Bids.Remove(bid);
 
 				db.SaveChanges();
-
-				return Json(sum + ' ' + currentUser.Cash);
+				string s = "{ \"Status\": \" 0 \", \"Score\": \" " + sum + " \", \"Cash\": \" " + currentUser.Cash + " \", \"Name\": \" " + currentUser.Nickname + " \" }";
+				return Json(s); 
 			}
 			else
-				return Json(-2);
-			
+				return Json("{ \"Status\": \"1\", \"Message\": \"Low bid!\"}");
+
 		}
 
 		public JsonResult GetBid()

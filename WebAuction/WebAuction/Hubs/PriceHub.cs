@@ -8,9 +8,9 @@ namespace WebAuction.Hubs
 {
 	public class PriceHub : Hub
 	{
-		public async Task Send(string message)
+		public async Task Send(string message, string user)
 		{
-			await Clients.All.SendAsync("Send", message);
+			await Clients.All.SendAsync("Send", message, user);
 		}
 	}
 }
