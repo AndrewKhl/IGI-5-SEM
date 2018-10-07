@@ -112,7 +112,6 @@
     });
 
     document.getElementById("btnBid").addEventListener("click", function (e) {
-        //var money = parseFloat($("#money").val()); 
         $.ajax({
             url: '@Url.Action("DoBid", "Lot")',
             type: "POST",

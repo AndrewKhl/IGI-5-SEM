@@ -73,7 +73,7 @@ namespace WebAuction.Controllers
 						}
 					}
 					else
-						currentLot.DateStart = DateTime.Now.AddMinutes(5);
+						currentLot.DateStart = DateTime.Now;
 
 					currentLot.DateEnd = currentLot.DateStart.AddHours(model.Hours);
 

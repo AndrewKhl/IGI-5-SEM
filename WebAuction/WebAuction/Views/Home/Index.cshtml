@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebAuction.Models.Lot>
+﻿@model IEnumerable<WebAuction.ViewModels.TableLot>
 @{
     ViewData["Title"] = "Аукцион";
 }
@@ -21,9 +21,11 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">StartPrice</th>
+                <th scope="col">MaxBid</th>
+                <th scope="col">HostBid</th>
                 <th scope="col">RedemptionPrice</th>
-                <th scope="col">Status</th>
+                <th scope="col">HostLot</th>
+                <th scope="col">DateEnd</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -33,9 +35,11 @@
             <tr>
                 <td>@lot.Id</td>
                 <td>@lot.NameLot</td>
-                <td>@lot.StartPrice</td>
+                <td>@lot.MaxBid</td>
+                <td>@lot.HostBid</td>
                 <td>@lot.RedemptionPrice</td>
-                <td>@lot.Status</td>
+                <td>@lot.HostLot</td>
+                <td>@lot.DateEnd</td>
                 <td>
                     <a href="/Lot/AddOrChangeLot/@lot.Id/">!</a>
                 </td>
@@ -43,31 +47,33 @@
             }
         </tbody>
     </table>
-    <input type="submit" class="btn btn-dark ml-3" value="Refresh" style="width:4vw; left:10%" onclick="Refresh()" />
-        <script>
-            $(document).ready(function () {
-                setInterval(function () {
-                    $.ajax({
-                        url: '@Url.Action("Refresh", "Home")',
-                        type: "GET",
-                        success: function (response) {
-                            response = JSON.parse(response);
-                            $("#body-table").empty();
-                            for (var i = 0; i < response.length; i++) {
-                                console.log(response[i]);
-                                $("#body-table").append("<tr>");
-                                $("#body-table").append("<td>" + response[i].Id + "</td>");
-                                $("#body-table").append("<td>" + response[i].NameLot + "</td>");
-                                $("#body-table").append("<td>" + response[i].StartPrice + "</td>");
-                                $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
-                                $("#body-table").append("<td>" + response[i].Status + "</td>");
-                                $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">!</a></td>");
-                                $("#body-table").append("</tr>");
-                            }
+    
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: '@Url.Action("Refresh", "Home")',
+                    type: "GET",
+                    success: function (response) {
+                        response = JSON.parse(response);
+                        $("#body-table").empty();
+                        for (var i = 0; i < response.length; i++) {
+                            console.log(response[i]);
+                            $("#body-table").append("<tr>");
+                            $("#body-table").append("<td>" + response[i].Id + "</td>");
+                            $("#body-table").append("<td>" + response[i].NameLot + "</td>");
+                            $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
+                            $("#body-table").append("<td>" + response[i].HostBid + "</td>");
+                            $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
+                            $("#body-table").append("<td>" + response[i].HostLot + "</td>");
+                            $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
+                            $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">!</a></td>");
+                            $("#body-table").append("</tr>");
                         }
-                    });
-                }, 60000);
-            });
-      </script>
+                    }
+                });
+            }, 60000);
+        });
+    </script>
 </body>
 </html>
