@@ -120,7 +120,7 @@
                 var val = JSON.parse(response);
                 if (val.Status == 0) {
                     connection.invoke("Send", val.Score, val.Name);
-                    
+
                     $("#ScoreProfile").empty();
                     $("#ScoreProfile").append("<h5>" + val.Cash + " $ </h5>");
                 }

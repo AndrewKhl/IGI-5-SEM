@@ -40,12 +40,13 @@ namespace WebAuction.Controllers
 		}
 
 		[HttpGet]
-		public JsonResult Refresh()
+		public JsonResult Refresh(string str)
 		{
+			bool status = str == "false" ? false : true;
 			DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TableLot[]));
 			using (MemoryStream fs = new MemoryStream())
 			{
-				jsonFormatter.WriteObject(fs, GetTableLots());
+				jsonFormatter.WriteObject(fs, GetTableLots(status));
 				return Json(Encoding.Default.GetString(fs.ToArray()));
 			}
 		}
@@ -55,7 +56,7 @@ namespace WebAuction.Controllers
 			var lots = !status ? db.Lots.Where(l => l.Status != "Sell" && DateTime.Compare(DateTime.Now, l.DateStart) > -1 && DateTime.Compare(DateTime.Now, l.DateEnd) < 1) :
 				db.Lots;
 
-			var tableLots = lots.Join(db.Users,
+			var extendedLots = lots.Join(db.Users,
 				l => l.HostId,
 				u => u.Id,
 				(l, u) => new TableLot
@@ -68,8 +69,11 @@ namespace WebAuction.Controllers
 					DateEnd = l.DateEnd.ToShortDateString()
 				});
 
-			foreach (var lot in tableLots)
+			var tableLots = extendedLots.ToArray();
+
+			for (int i = 0; i < tableLots.Count(); ++i)
 			{
+				var lot = tableLots[i];
 				Bid maxBid = db.Bids.FirstOrDefault(b => b.LotId == lot.Id);
 				if (maxBid != null)
 				{
@@ -78,10 +82,13 @@ namespace WebAuction.Controllers
 					lot.HostBid = hostBid.Nickname;
 				}
 				else
+				{
 					lot.MaxBid = lot.StartPrice;
+					lot.HostBid = "";
+				}
 			}
 
-			return tableLots.ToArray();
+			return tableLots;
 		}
 	}
 }

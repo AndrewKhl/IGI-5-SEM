@@ -16,6 +16,11 @@
     </div>
 
     <h3>Lots</h3>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="view-all-lots">
+        <label class="form-check-label">View all lots</label>
+    </div>
+
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -32,28 +37,30 @@
         <tbody id="body-table">
             @foreach (var lot in Model)
             {
-            <tr>
-                <td>@lot.Id</td>
-                <td>@lot.NameLot</td>
-                <td>@lot.MaxBid</td>
-                <td>@lot.HostBid</td>
-                <td>@lot.RedemptionPrice</td>
-                <td>@lot.HostLot</td>
-                <td>@lot.DateEnd</td>
-                <td>
-                    <a href="/Lot/AddOrChangeLot/@lot.Id/">!</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@lot.Id</td>
+                    <td>@lot.NameLot</td>
+                    <td>@lot.MaxBid</td>
+                    <td>@lot.HostBid</td>
+                    <td>@lot.RedemptionPrice</td>
+                    <td>@lot.HostLot</td>
+                    <td>@lot.DateEnd</td>
+                    <td>
+                        <a href="/Lot/AddOrChangeLot/@lot.Id/">!</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
-    
+
     <script>
         $(document).ready(function () {
             setInterval(function () {
+                var status = $('#view-all-lots').is(":checked");
                 $.ajax({
                     url: '@Url.Action("Refresh", "Home")',
                     type: "GET",
+                    data: "str=" + status,
                     success: function (response) {
                         response = JSON.parse(response);
                         $("#body-table").empty();
@@ -63,6 +70,8 @@
                             $("#body-table").append("<td>" + response[i].Id + "</td>");
                             $("#body-table").append("<td>" + response[i].NameLot + "</td>");
                             $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
+                            if (response[i].HostBid == null)
+                                response[i].HostBid = "";
                             $("#body-table").append("<td>" + response[i].HostBid + "</td>");
                             $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
                             $("#body-table").append("<td>" + response[i].HostLot + "</td>");

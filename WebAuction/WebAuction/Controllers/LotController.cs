@@ -171,7 +171,7 @@ namespace WebAuction.Controllers
 
 			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
 
-			if (max < value)
+			if (max < value && value >= currentLot.StartPrice)
 			{
 
 				Bid bid = db.Bids.FirstOrDefault(b => b.Sum == max && b.LotId == currentLot.Id);
