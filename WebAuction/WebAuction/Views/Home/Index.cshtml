@@ -19,7 +19,7 @@
     @if (User.IsInRole("admin"))
     {
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="view-all-lots">
+            <input type="checkbox" class="form-check-input" id="view-all-lots" onclick="RefreshTable()">
             <label class="form-check-label">View all lots</label>
         </div>
     }
@@ -36,55 +36,42 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody id="body-table">
-            @foreach (var lot in Model)
-            {
-                <tr>
-                    <td>@lot.Id</td>
-                    <td>@lot.NameLot</td>
-                    <td>@lot.MaxBid</td>
-                    <td>@lot.HostBid</td>
-                    <td>@lot.RedemptionPrice</td>
-                    <td>@lot.HostLot</td>
-                    <td>@lot.DateEnd</td>
-                    <td>
-                        <a href="/Lot/AddOrChangeLot/@lot.Id/">!</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
+        <tbody id="body-table"></tbody>
     </table>
 
     <script>
-        $(document).ready(function () {
-            setInterval(function () {
-                var status = $('#view-all-lots').is(":checked");
-                $.ajax({
-                    url: '@Url.Action("Refresh", "Home")',
-                    type: "GET",
-                    data: "str=" + status,
-                    success: function (response) {
-                        response = JSON.parse(response);
-                        $("#body-table").empty();
-                        for (var i = 0; i < response.length; i++) {
-                            console.log(response[i]);
-                            $("#body-table").append("<tr>");
-                            $("#body-table").append("<td>" + response[i].Id + "</td>");
-                            $("#body-table").append("<td>" + response[i].NameLot + "</td>");
-                            $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
-                            if (response[i].HostBid == null)
-                                response[i].HostBid = "";
-                            $("#body-table").append("<td>" + response[i].HostBid + "</td>");
-                            $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
-                            $("#body-table").append("<td>" + response[i].HostLot + "</td>");
-                            $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
-                            $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">!</a></td>");
-                            $("#body-table").append("</tr>");
-                        }
+        function RefreshTable() {
+            var status = $('#view-all-lots').is(":checked");
+            $.ajax({
+                url: '@Url.Action("Refresh", "Home")',
+                type: "GET",
+                data: "str=" + status,
+                success: function (response) {
+                    response = JSON.parse(response);
+                    $("#body-table").empty();
+                    for (var i = 0; i < response.length; i++) {
+                        $("#body-table").append("<tr>");
+                        $("#body-table").append("<td>" + response[i].Id + "</td>");
+                        $("#body-table").append("<td>" + response[i].NameLot + "</td>");
+                        $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
+                        if (response[i].HostBid == null)
+                            response[i].HostBid = "";
+                        $("#body-table").append("<td>" + response[i].HostBid + "</td>");
+                        $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
+                        $("#body-table").append("<td>" + response[i].HostLot + "</td>");
+                        $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
+                        $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">!</a></td>");
+                        $("#body-table").append("</tr>");
                     }
-                });
-            }, 60000);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            RefreshTable();
+            setInterval(RefreshTable, 30000);
         });
+
     </script>
 </body>
 </html>
