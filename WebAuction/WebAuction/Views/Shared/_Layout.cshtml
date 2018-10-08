@@ -20,12 +20,15 @@
             <button class="btn btn-dark" style="margin:5px">Logout</button>
         </form>
     </div>
-    
+
     <div style="position:absolute; left:18vw; top:11vh; width:81vw">
         @RenderBody()
     </div>
 
+
+
     <div class="sidebar-menu">
+        <h3 id="clock"></h3>
         <ul>
             <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
             <li><a asp-controller="Home" asp-action="Bids">Пользователи</a></li>
@@ -33,7 +36,7 @@
             @if (User.IsInRole("admin"))
             {
                 <li><a asp-controller="Home" asp-action="Users">Пользователи</a></li>
-            }    
+            }
         </ul>
     </div>
 
@@ -45,8 +48,18 @@
             </form>
             <div id="ScoreProfile">
                 <h5>@ViewBag.Score $</h5>
-            </div>      
+            </div>
         </nav>
     </div>
+
+    <script>
+        window.onload = function () {
+            window.setInterval(function () {
+                var now = new Date();
+                var clock = document.getElementById("clock");
+                clock.innerHTML = now.toLocaleTimeString();
+            }, 1000);
+        };
+    </script>
 </body>
 </html>

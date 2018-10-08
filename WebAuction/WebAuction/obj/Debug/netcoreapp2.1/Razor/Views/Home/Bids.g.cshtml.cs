@@ -60,7 +60,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(110, 48, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "252e9a51dcbc4368850dea52f54a7fc1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b59d4f35edc940b491e330dd05a22adf", async() => {
                 BeginContext(116, 35, true);
                 WriteLiteral("\r\n    <title>List of bids</title>\r\n");
                 EndContext();
@@ -80,7 +80,7 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(160, 2147, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b4fce8b1b7bb4527b7ca250ff550552f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ed9a9d5945944b21bcf6ba8461effa50", async() => {
                 BeginContext(166, 21, true);
                 WriteLiteral("\r\n    <h3>Bids</h3>\r\n");
                 EndContext();
