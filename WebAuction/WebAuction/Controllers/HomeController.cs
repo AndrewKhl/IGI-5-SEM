@@ -55,8 +55,8 @@ namespace WebAuction.Controllers
 		private TableLot[] GetTableLots(bool status = false)
 		{
 			var lots = !status ? db.Lots.Where
-				(l => l.Status != "Sell" && 
-				l.Status != "Ignore" && 
+				(l => l.Status != "sell" && 
+				l.Status != "ignore" && 
 				DateTime.Compare(DateTime.Now, l.DateStart) > -1 && 
 				DateTime.Compare(DateTime.Now, l.DateEnd) < 1) : db.Lots;
 
@@ -102,7 +102,7 @@ namespace WebAuction.Controllers
 					User hostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
 					LotController.BuyLot(lot.Id, bid.Sum, hostBid.Nickname);
 				}
-				lot.Status = "Ignore";
+				lot.Status = "ignore";
 			}
 
 			db.SaveChangesAsync();

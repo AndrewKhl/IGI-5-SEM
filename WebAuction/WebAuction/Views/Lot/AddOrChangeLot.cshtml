@@ -56,50 +56,25 @@
     </div>
 </form>
 
-<h5 id="MaxBid">@Model.MaxBid</h5>
-<div class="form-row">
-    <div class="form-inline col-md-2">
-        <input type="number" class="form-control col-md-4" id="money" />
-        <button type="submit" class="btn btn-dark offset-1" style="width:4vw" id="btnBid">Do Bid</button>
+@if (Model.Status != "sell" && Model.Status != "ignore" && Model.NameHost != User.Identity.Name)
+{
+    <h5 id="HostBid">Host bid: @Model.HostBid </h5>
+    <h5 id="MaxBid">Sum: @Model.MaxBid$</h5>
+
+    <div class="form-inline my-2">
+        <h5 class="mr-1">Your bid</h5>
+        <input type="number" class="form-control col-md-1 mx-2" id="money" />
+        <button type="submit" class="btn btn-dark ml-2" style="width:4vw" id="btnBid">Do Bid</button>
 
     </div>
-    <form asp-controller="Lot" asp-action="BuyLot">
-        <input type="submit" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
-    </form>
-</div>
 
-
-@*<script>
-        function DoBid() {
-            var money = parseFloat($("#money").val());
-            if (money >= parseFloat('@Model.StartPrice')) {
-                    if (money > parseFloat(0)) {
-                        $.ajax({
-                            url: '@Url.Action("DoBid", "Lot")',
-                            type: "POST",
-                            data: "sum=" + $("#money").val(),
-                            success: function (response) {
-                                if (response == '-1')
-                                    alert('Недостаточно средст на счёте');
-                                else
-                                    if (response == '-2')
-                                        alert('Ставка слишком мала');
-                                    else {
-                                        var val = response.split(' ');
-                                        $("#MaxBid").text(val[0]);
-                                        $("#ScoreProfile").empty();
-                                        $("#ScoreProfile").append("<h5>" + val[1] + " $ </h5>");
-                                    }
-                            }
-                        });
-                    }
-                    else
-                        alert('Введите положительную сумму');
-            }
-            else
-                alert('Ставка слишком мала');
-        }
-    </script>*@
+    <div class="form-inline">
+        <h5 class="mr-3">Redemption price: @Model.RedemptionPrice$</h5>
+        <form asp-controller="Lot" asp-action="BuyLot">
+            <input type="submit" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
+        </form>
+    </div>
+}
 
 
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
@@ -108,7 +83,9 @@
 
     connection.on("Send", function (data, name) {
         $("#MaxBid").empty();
-        $("#MaxBid").text(name + ": " + data);
+        $("#MaxBid").text("Sum: " + data + "$");
+        $("#HostBid").empty();
+        $("#HostBid").text("Host bid: " + name);
     });
 
     document.getElementById("btnBid").addEventListener("click", function (e) {

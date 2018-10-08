@@ -32,13 +32,24 @@ namespace WebAuction.Controllers
 				StartPrice = currentLot.StartPrice,
 				RedemptionPrice = currentLot.RedemptionPrice,
 				DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm:ss"),
-				Id = currentLot.Id
+				Id = currentLot.Id,
+				Status = currentLot.Status
 			};
 			TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
 			model.Hours = diff.Hours;
-			model.MaxBid = GetMaxBid();
+			Bid bid = GetMaxBid();
+			if (bid != null)
+			{
+				model.MaxBid = bid.Sum;
+				model.HostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId).Nickname;
+			}
+			else
+			{
+				model.MaxBid = 0;
+				model.HostBid = "";
+			}
 
-			ViewData["DateStart"] = model.DateStart;
+			model.NameHost = db.Users.FirstOrDefault(u => u.Id == currentLot.HostId).Nickname;
 
 			return View(model);
 		}
@@ -120,8 +131,7 @@ namespace WebAuction.Controllers
 			User buyer = db.Users.FirstOrDefault(u => u.Nickname == nickname);
 			User seller = db.Users.FirstOrDefault(u => u.Id == lot.Id);
 
-			double max = GetMaxBid();
-			Bid bid = db.Bids.FirstOrDefault(b => b.LotId == lot.Id && max == b.Sum);
+			Bid bid = GetMaxBid(id_lot);
 
 			if (bid != null)
 			{
@@ -165,7 +175,8 @@ namespace WebAuction.Controllers
 		[HttpPost]
 		public JsonResult DoBid(string sum)
 		{
-			double max = GetMaxBid();
+			Bid maxBid = GetMaxBid();
+			double max = maxBid != null ? maxBid.Sum : 0;
 
 			double value = Convert.ToDouble(sum.Replace('.', ','));
 
@@ -204,7 +215,7 @@ namespace WebAuction.Controllers
 					db.Bids.Remove(bid);
 
 				db.SaveChanges();
-				string s = "{ \"Status\": \" 0 \", \"Score\": \" " + sum + " \", \"Cash\": \" " + currentUser.Cash + " \", \"Name\": \" " + currentUser.Nickname + " \" }";
+				string s = "{ \"Status\": \" 0\", \"Score\": \" " + sum + "\", \"Cash\": \" " + currentUser.Cash + "\", \"Name\": \" " + currentUser.Nickname + "\" }";
 				return Json(s); 
 			}
 			else
@@ -217,10 +228,22 @@ namespace WebAuction.Controllers
 			return Json(GetMaxBid());
 		}
 
-		private static double GetMaxBid()
+		private static Bid GetMaxBid(int id = 0)
 		{
-			var bids = db.Bids.Where(b => b.LotId == currentLot.Id);
-			return bids.Count() != 0 ? bids.Max(b => b.Sum) : 0;
+			if (id == 0)
+				id = currentLot.Id;
+			var bids = db.Bids.Where(b => b.LotId == id);
+			if (bids.Count() == 0)
+				return null;
+
+			Bid maxBid = bids.First();
+			foreach(var bid in bids)
+			{
+				if (maxBid.Sum < bid.Sum)
+					maxBid = bid;
+			}
+
+			return maxBid;
 		}
 
 		public void CountScore()

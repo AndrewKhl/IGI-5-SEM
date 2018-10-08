@@ -31,9 +31,11 @@ namespace WebAuction.ViewModels
 		public double RedemptionPrice { get; set; }
 
 		public string Picture { get; set; }
-
 		public int Id { get; set; }
 
 		public double MaxBid { get; set; }
+		public string HostBid { get; set; }
+		public string Status { get; set; }
+		public string NameHost { get; set; }
 	}
 }
