@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using WebAuction.Models;
 
 namespace WebAuction.ViewModels
 {
@@ -19,5 +20,8 @@ namespace WebAuction.ViewModels
 		public string Email { get; set; }
 
 		public double Cash { get; set; }
+
+		public Lot[] PurchasedLots { get; set; }
+		public Lot[] SoldLots { get; set; }
 	}
 }

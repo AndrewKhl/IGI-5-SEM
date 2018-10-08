@@ -159,6 +159,9 @@ namespace WebAuction.Controllers
 			seller.Cash += money;
 			lot.HostId = buyer.Id;
 			lot.Status = "sell";
+			lot.StartPrice = money;
+			if (DateTime.Compare(DateTime.Now, lot.DateEnd) == -1)
+				lot.DateEnd = DateTime.Now;
 
 			db.SaveChanges();
 			return true;

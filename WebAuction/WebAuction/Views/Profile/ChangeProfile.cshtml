@@ -4,11 +4,11 @@
 }
 
 <div class="form-inline offset-6 my-4">
-    <div class="form-inline col-4">
+    <div class="form-inline col-4 offset-3">
         <h5>Score: </h5>
         <div id="results" class="mx-1 ml-1"><h5>@Model.Cash $</h5></div>
     </div>
-    <div class="offset-3" style="position:relative; left:5px">
+    <div style="position:relative; left:5px">
         <input type="text" name="name" id="money" min="1" class="form-control ml-4" />
         <input type="submit" class="btn btn-dark ml-3" value="Add" style="width:4vw; left:10%" onclick="AddCash()" />
     </div>
@@ -46,7 +46,70 @@
         <input type="submit" class="btn btn-dark offset-5 mt" value="Save" style="width:4vw;" />
     </div>
 </form>
-    
+
+<div class="form-row mt-5">
+    <div class="form-group col-md-5">
+        <h5>Purchased Lots</h5>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">DateEnd</th>
+                    <th scope="col">Sum</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var lot in Model.PurchasedLots)
+                {
+                    <tr>
+                        <td>@lot.Id</td>
+                        <td>@lot.NameLot</td>
+                        <td>@lot.DateEnd</td>
+                        <td>@lot.StartPrice</td>
+                        <td>
+                            <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-route-id="@lot.Id" method="get">
+                                <button type="submit">!</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+         </table>
+    </div>
+    <div class="form-group col-md-5 offset-2">
+        <h5>Sold Lots</h5>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">DateStart</th>
+                    <th scope="col">StartPrice</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lot in Model.SoldLots)
+                {
+                    <tr>
+                        <td>@lot.Id</td>
+                        <td>@lot.NameLot</td>
+                        <td>@lot.DateStart</td>
+                        <td>@lot.StartPrice</td>
+                        <td>
+                            <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-route-id="@lot.Id" method="get">
+                                <button type="submit">!</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <script>
     function AddCash() {
         if (parseFloat($("#money").val()) > 0.0) {

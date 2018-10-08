@@ -31,6 +31,10 @@ namespace WebAuction.Controllers
 				Email = currentProfile.Email,
 				Cash = currentProfile.Cash
 			};
+
+			model.SoldLots = db.Lots.Where(l => l.HostId == currentProfile.Id && l.Status != "sell").ToArray();
+			model.PurchasedLots = db.Lots.Where(l => l.HostId == currentProfile.Id && l.Status == "sell").ToArray();
+
 			return View(model);
 		}
 
