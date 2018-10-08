@@ -28,6 +28,13 @@ namespace WebAuction.Controllers
 		}
 
 		[Authorize]
+		public IActionResult Bids()
+		{
+			CountScore();
+			return View();
+		}
+
+		[Authorize]
 		public IActionResult Users()
 		{
 			CountScore();
@@ -107,6 +114,48 @@ namespace WebAuction.Controllers
 
 			db.SaveChangesAsync();
 			return tableLots;
+		}
+
+		private TableBid[] GetTableBids(bool status = false)
+		{
+			User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
+			var bids = !status ? db.Bids.Where(b => b.HostId == currentUser.Id) : db.Bids;
+
+			var extendedBids = bids.Join(db.Lots,
+				b => b.LotId,
+				l => l.Id,
+				(b, l) => new TableBid
+				{
+					LotName = l.NameLot,
+					DateEnd = l.DateEnd.ToShortDateString(),
+					DateBid = b.DateBid.ToShortDateString(),
+					Sum = b.Sum,
+					Id = b.Id,
+					LotId = l.Id,
+					HostId = b.HostId
+				});
+
+			var tableBids = extendedBids.ToArray();
+
+			for (int i = 0; i < tableBids.Count(); ++i)
+				if (!status)
+					tableBids[i].HostName = currentUser.Nickname;
+				else
+					tableBids[i].HostName = db.Users.FirstOrDefault(u => u.Id == tableBids[i].HostId).Nickname;
+
+			return tableBids;
+		}
+
+		[HttpGet]
+		public JsonResult RefreshTableBids(string str)
+		{
+			bool status = str == "false" ? false : true;
+			DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TableBid[]));
+			using (MemoryStream fs = new MemoryStream())
+			{
+				jsonFormatter.WriteObject(fs, GetTableBids(status));
+				return Json(Encoding.Default.GetString(fs.ToArray()));
+			}
 		}
 	}
 }

@@ -28,7 +28,7 @@
     <div class="sidebar-menu">
         <ul>
             <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
-            <li><a>Ставки</a></li>
+            <li><a asp-controller="Home" asp-action="Bids">Пользователи</a></li>
             <li><a asp-controller="Profile" asp-action="ChangeProfile">Профиль</a></li>
             @if (User.IsInRole("admin"))
             {

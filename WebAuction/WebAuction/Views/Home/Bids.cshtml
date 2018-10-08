@@ -4,38 +4,60 @@
 }
 <!DOCTYPE html>
 
-@*<html>
+<html>
 <head>
     <title>List of bids</title>
 </head>
 <body>
     <h3>Bids</h3>
+    @if (User.IsInRole("admin"))
+    {
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="view-all-bids" onclick="RefreshTable()">
+            <label class="form-check-label">View all bids</label>
+        </div>
+    }
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col"></th>
+                <th scope="col">Sum</th>
+                <th scope="col">Date bid</th>
+                <th scope="col">Lot ID</th>
+                <th scope="col">Name lot</th>
+                <th scope="col">Date end</th>
+                <th scope="col">Host bid</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@user.Id</td>
-                    <td>@user.Nickname</td>
-                    <td>@user.Name</td>
-                    <td>@user.Email</td>
-                    <td>
-                        <form asp-controller="Profile" asp-action="ChangeProfile" asp-route-id="@user.Id" method="get">
-                            <button type="submit">!</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
+        <tbody id="body-table"></tbody>
     </table>
+
+    <script>
+        function RefreshTable() {
+            var status = $('#view-all-bids').is(":checked");
+            $.ajax({
+                url: '@Url.Action("RefreshTableBids", "Home")',
+                type: "GET",
+                data: "str=" + status,
+                success: function (response) {
+                    response = JSON.parse(response);
+                    $("#body-table").empty();
+                    for (var i = 0; i < response.length; i++) {
+                        $("#body-table").append("<tr>");
+                        $("#body-table").append("<td>" + response[i].Id + "</td>");
+                        $("#body-table").append("<td>" + response[i].Sum + "</td>");
+                        $("#body-table").append("<td>" + response[i].DateBid + "</td>");
+                        $("#body-table").append("<td>" + response[i].LotId + "</td>");
+                        $("#body-table").append("<td>" + response[i].LotName + "</td>");
+                        $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
+                        $("#body-table").append("<td>" + response[i].HostName + "</td>");
+                        $("#body-table").append("</tr>");
+                    }
+                }
+            });
+        };
+
+        $(document).ready(RefreshTable());
+    </script>
 </body>
-</html>*@
+</html>
