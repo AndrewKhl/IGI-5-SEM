@@ -31,7 +31,7 @@ namespace WebAuction.Controllers
 				Quantity = currentLot.Quantity,
 				StartPrice = currentLot.StartPrice,
 				RedemptionPrice = currentLot.RedemptionPrice,
-				DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm:ss"),
+				DateStart = currentLot.DateStart.ToString("yyyy-MM-ddThh:mm"),
 				Id = currentLot.Id,
 				Status = currentLot.Status
 			};
@@ -50,6 +50,8 @@ namespace WebAuction.Controllers
 			}
 
 			model.NameHost = db.Users.FirstOrDefault(u => u.Id == currentLot.HostId).Nickname;
+
+			ViewBag.DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm");
 
 			return View(model);
 		}

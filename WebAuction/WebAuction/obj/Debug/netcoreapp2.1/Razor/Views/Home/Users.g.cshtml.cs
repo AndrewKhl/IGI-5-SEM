@@ -65,7 +65,7 @@ using WebAuction.Models;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(112, 49, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c4f4f27af6804c34bab0e1ef40616fcc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3bcd26be063740a2816c937b250618aa", async() => {
                 BeginContext(118, 36, true);
                 WriteLiteral("\r\n    <title>List of users</title>\r\n");
                 EndContext();
@@ -85,7 +85,7 @@ using WebAuction.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(163, 969, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8da60fdda5f04e3492089769118fb7aa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7789b38919724fc9a2ff6679818b1bac", async() => {
                 BeginContext(169, 371, true);
                 WriteLiteral(@"
     <h3>Users</h3>
@@ -152,7 +152,7 @@ using WebAuction.Models;
                 WriteLiteral("</td>\r\n                    <td>\r\n                        ");
                 EndContext();
                 BeginContext(836, 190, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ed3c19413674a2e90c00bc9b82a2bc1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f927755d3e2542d1859f865f6fa83ad9", async() => {
                     BeginContext(931, 88, true);
                     WriteLiteral("\r\n                            <button type=\"submit\">!</button>\r\n                        ");
                     EndContext();
