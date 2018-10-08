@@ -12,7 +12,7 @@ namespace WebAuction.Controllers
 {
 	public class LotController : Controller
 	{
-		private AuctionContext db;
+		private static AuctionContext db;
 		private static Lot currentLot;
 		public LotController(AuctionContext context)
 		{
@@ -114,7 +114,7 @@ namespace WebAuction.Controllers
 		}
 
 
-		public bool BuyLot(int id_lot, double money,string nickname)
+		public static bool BuyLot(int id_lot, double money, string nickname)
 		{
 			Lot lot = db.Lots.FirstOrDefault(l => l.Id == id_lot);
 			User buyer = db.Users.FirstOrDefault(u => u.Nickname == nickname);
@@ -217,7 +217,7 @@ namespace WebAuction.Controllers
 			return Json(GetMaxBid());
 		}
 
-		private double GetMaxBid()
+		private static double GetMaxBid()
 		{
 			var bids = db.Bids.Where(b => b.LotId == currentLot.Id);
 			return bids.Count() != 0 ? bids.Max(b => b.Sum) : 0;

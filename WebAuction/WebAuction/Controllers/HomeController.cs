@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAuction.Models;
 using WebAuction.ViewModels;
+using WebAuction.Controllers;
 
 namespace WebAuction.Controllers
 {
@@ -53,8 +54,11 @@ namespace WebAuction.Controllers
 
 		private TableLot[] GetTableLots(bool status = false)
 		{
-			var lots = !status ? db.Lots.Where(l => l.Status != "Sell" && DateTime.Compare(DateTime.Now, l.DateStart) > -1 && DateTime.Compare(DateTime.Now, l.DateEnd) < 1) :
-				db.Lots;
+			var lots = !status ? db.Lots.Where
+				(l => l.Status != "Sell" && 
+				l.Status != "Ignore" && 
+				DateTime.Compare(DateTime.Now, l.DateStart) > -1 && 
+				DateTime.Compare(DateTime.Now, l.DateEnd) < 1) : db.Lots;
 
 			var extendedLots = lots.Join(db.Users,
 				l => l.HostId,
@@ -88,6 +92,20 @@ namespace WebAuction.Controllers
 				}
 			}
 
+			lots = db.Lots.Where(l => l.Status == "" && DateTime.Compare(DateTime.Now, l.DateEnd) != -1);
+
+			foreach (var lot in lots)
+			{
+				Bid bid = db.Bids.FirstOrDefault(b => b.LotId == lot.Id);
+				if (bid != null)
+				{
+					User hostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId);
+					LotController.BuyLot(lot.Id, bid.Sum, hostBid.Nickname);
+				}
+				lot.Status = "Ignore";
+			}
+
+			db.SaveChangesAsync();
 			return tableLots;
 		}
 	}
