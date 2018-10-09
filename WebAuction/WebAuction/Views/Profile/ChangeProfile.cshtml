@@ -3,14 +3,16 @@
     ViewData["Title"] = "ChangeProfile";
 }
 
-<div class="form-inline offset-6 my-4">
-    <div class="form-inline col-4 offset-3">
-        <h5>Score: </h5>
-        <div id="results" class="mx-1 ml-1"><h5>@Model.Cash $</h5></div>
-    </div>
-    <div style="position:relative; left:5px">
-        <input type="text" name="name" id="money" min="1" class="form-control ml-4" />
-        <input type="submit" class="btn btn-dark ml-3" value="Add" style="width:4vw; left:10%" onclick="AddCash()" />
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<div class="form-inline offset-6 my-4 col-6">
+    <h5 class="col-1">@Localizer["Money"]: </h5>
+    <h5 id="results" class="col-3 ml-4">@Model.Cash $</h5>
+    <div class="offset-2">
+        <input type="text" name="name" id="money" min="1" class="form-control mr-4" />
+        <input type="submit" class="btn btn-dark" value="@Localizer["Add cash"]" onclick="AddCash()" />
     </div>
 </div>
 
@@ -18,12 +20,12 @@
     <div asp-validation-summary="ModelOnly" class="list-errors offset-6"></div>
     <div class="form-row">
         <div class="form-group col-md-3 offset-6">
-            <label>Nickname</label>
+            <label>@Localizer["Nickname"]</label>
             <input asp-for="Nickname" class="form-control">
             <span asp-validation-for="Nickname" style="color:red"></span>
         </div>
         <div class="form-group col-md-3">
-            <label>Name user</label>
+            <label>@Localizer["NameUser"]</label>
             <input asp-for="Name" class="form-control">
             <span asp-validation-for="Name" style="color:red"></span>
         </div>
@@ -36,32 +38,32 @@
             <span asp-validation-for="Email" style="color:red"></span>
         </div>
         <div class="form-group col-md-3">
-            <label>Password</label>
+            <label>@Localizer["Password"]</label>
             <input asp-for="Password" type="password" class="form-control">
             <span asp-validation-for="Password" style="color:red"></span>
         </div>
     </div>
 
-    <div class="offset-11">
-        <input type="submit" class="btn btn-dark offset-5 mt" value="Save" style="width:4vw;" />
+    <div class="float-right">
+        <input type="submit" class="btn btn-dark" value="@Localizer["Save"]" />
     </div>
 </form>
 
 <div class="form-row mt-5">
     <div class="form-group col-md-5">
-        <h5>Purchased Lots</h5>
+        <h5>@Localizer["Purchased Lot"]</h5>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">DateEnd</th>
-                    <th scope="col">Sum</th>
+                    <th scope="col">@Localizer["NameLot"]</th>
+                    <th scope="col">@Localizer["DateEnd"]</th>
+                    <th scope="col">@Localizer["Sum"]</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var lot in Model.PurchasedLots)
+                @foreach (var lot in Model.PurchasedLots)
                 {
                     <tr>
                         <td>@lot.Id</td>
@@ -70,23 +72,23 @@
                         <td>@lot.StartPrice</td>
                         <td>
                             <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-route-id="@lot.Id" method="get">
-                                <button class="btn-dark size-button" style="width:28px"  type="submit">!</button>
+                                <button class="btn-dark size-button" style="width:28px" type="submit">!</button>
                             </form>
                         </td>
                     </tr>
                 }
             </tbody>
-         </table>
+        </table>
     </div>
     <div class="form-group col-md-5 offset-2">
-        <h5>Sold Lots</h5>
+        <h5>@Localizer["Sold Lot"]</h5>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">DateStart</th>
-                    <th scope="col">StartPrice</th>
+                    <th scope="col">@Localizer["NameLot"]</th>
+                    <th scope="col">@Localizer["DateEnd"]</th>
+                    <th scope="col">@Localizer["StartPrice"]</th>
                     <th scope="col"></th>
                 </tr>
             </thead>

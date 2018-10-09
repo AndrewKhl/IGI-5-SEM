@@ -2,6 +2,11 @@
 @{
     ViewData["Title"] = "Bids";
 }
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 <!DOCTYPE html>
 
 <html>
@@ -9,24 +14,24 @@
     <title>List of bids</title>
 </head>
 <body>
-    <h3>Bids</h3>
+    <h3>@Localizer["Bids"]</h3>
     @if (User.IsInRole("admin"))
     {
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="view-all-bids" onclick="RefreshTable()">
-            <label class="form-check-label">View all bids</label>
+            <label class="form-check-label">@Localizer["ViewAllBids"]</label>
         </div>
     }
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Sum</th>
-                <th scope="col">Date bid</th>
-                <th scope="col">Lot ID</th>
-                <th scope="col">Name lot</th>
-                <th scope="col">Date end</th>
-                <th scope="col">Host bid</th>
+                <th scope="col">@Localizer["Sum"]</th>
+                <th scope="col">@Localizer["DateBid"]</th>
+                <th scope="col">@Localizer["LotID"]</th>
+                <th scope="col">@Localizer["NameLot"]</th>
+                <th scope="col">@Localizer["DateEnd"]</th>
+                <th scope="col">@Localizer["HostBid"]</th>
             </tr>
         </thead>
         <tbody id="body-table"></tbody>

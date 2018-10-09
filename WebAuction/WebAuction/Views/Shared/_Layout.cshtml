@@ -28,7 +28,7 @@
 
 
     <div class="sidebar-menu">
-        <h3 id="clock"></h3>
+        <h3 id="clock">Clock</h3>
         <ul>
             <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
             <li><a asp-controller="Home" asp-action="Bids">Пользователи</a></li>
@@ -38,6 +38,9 @@
                 <li><a asp-controller="Home" asp-action="Users">Пользователи</a></li>
             }
         </ul>
+        <div>
+            @await Html.PartialAsync("_SelectLanguagePartial")
+        </div>
     </div>
 
     <div style="position:absolute; top:5vh; width:100vw">
@@ -47,19 +50,19 @@
                 <button class="btn btn-dark" type="submit">Search</button>
             </form>
             <div id="ScoreProfile">
-                <h5>@ViewBag.Score $</h5>
+                <h5>Money: @ViewBag.Score $</h5>
             </div>
         </nav>
     </div>
 
+    
+
     <script>
-        window.onload = function () {
-            window.setInterval(function () {
-                var now = new Date();
-                var clock = document.getElementById("clock");
-                clock.innerHTML = now.toLocaleTimeString();
-            }, 1000);
-        };
+        $(document).ready(setInterval(function () {
+            var now = new Date();
+            var clock = document.getElementById("clock");
+            clock.innerHTML = now.toLocaleTimeString();
+        }, 1000));
     </script>
 </body>
 </html>

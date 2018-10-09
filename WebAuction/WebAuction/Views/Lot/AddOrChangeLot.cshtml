@@ -3,7 +3,11 @@
     ViewData["Title"] = "CreateLot";
 }
 
-<h2>Lot</h2>
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<h2>@Localizer["Lot"]</h2>
 
 @if (User.IsInRole("admin") || Model.NameHost == User.Identity.Name)
 {
@@ -11,30 +15,30 @@
         <div asp-validation-summary="ModelOnly" class="list-errors offset-6"></div>
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
-                <label>Name</label>
+                <label>@Localizer["Name"]</label>
                 <input asp-for="NameLot" type="text" class="form-control" placeholder="Name">
                 <span asp-validation-for="NameLot" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
-                <label>Quantity</label>
+                <label>@Localizer["Quantity"]</label>
                 <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity">
                 <span asp-validation-for="Quantity" style="color:red"></span>
             </div>
         </div>
 
         <div class="form-group offset-6">
-            <label>Description</label>
+            <label>@Localizer["Description"]</label>
             <textarea type="text" class="form-control" rows="3">@Model.Description</textarea>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
-                <label>Start price</label>
+                <label>@Localizer["StartPrice"]</label>
                 <input asp-for="StartPrice" type="number" class="form-control" placeholder="Start price">
                 <span asp-validation-for="StartPrice" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
-                <label>Redemtion price</label>
+                <label>@Localizer["RedemptionPrice"]</label>
                 <input asp-for="RedemptionPrice" type="number" class="form-control" placeholder="Redemtion price">
                 <span asp-validation-for="RedemptionPrice" style="color:red"></span>
             </div>
@@ -42,19 +46,19 @@
 
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
-                <label>Date start</label>
+                <label>@Localizer["Date start"]</label>
                 <input asp-for="DateStart" type="datetime-local" class="form-control" placeholder="Date start" value="@Model.DateStart">
                 <span asp-validation-for="DateStart" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
-                <label>Hours in auction</label>
+                <label>@Localizer["Hours in action"]</label>
                 <input asp-for="Hours" type="number" class="form-control" placeholder="Hours">
                 <span asp-validation-for="Hours" style="color:red"></span>
             </div>
         </div>
 
-        <div class="offset-11">
-            <input type="submit" class="btn btn-dark offset-5" value="Save" style="width:4vw;" />
+        <div class="float-right">
+            <input type="submit" class="btn btn-dark" value="@Localizer["Save"]" />
         </div>
     </form>
 }
@@ -62,39 +66,39 @@ else
 {
     <div class="form-row my-3">
         <div class="form-inline col-md-3 offset-6">
-            <h4>Name: @Model.NameLot</h4>
+            <h4>@Localizer["Name"]: @Model.NameLot</h4>
         </div>
         <div class="form-inline col-md-3">
-            <h4>Quantity: @Model.Quantity</h4>
+            <h4>@Localizer["Quantity"]: @Model.Quantity</h4>
         </div>
     </div>
 
     <div class="form-group offset-6 my-3">
-        <h4>Description</h4>
+        <h4>@Localizer["Description"]</h4>
         <textarea type="text" class="form-control" rows="3" disabled="disabled" style="color:#000000;"></textarea>
     </div>
 
     <div class="form-row my-3">
         <div class="form-inline col-md-3 offset-6">
-            <h4>Start price: @Model.StartPrice</h4>
+            <h4>@Localizer["StartPrice"]: @Model.StartPrice</h4>
         </div>
         <div class="form-inline col-md-3">
-            <h4>Redemption Price: @Model.RedemptionPrice</h4>
+            <h4>@Localizer["RedemptionPrice"]: @Model.RedemptionPrice</h4>
         </div>
     </div>
 
     <div class="form-row my-3">
         <div class="form-inline col-md-3 offset-6">
-            <h4>Date Start: @ViewBag.DateStart</h4>
+            <h4>@Localizer["Date start"]: @ViewBag.DateStart</h4>
         </div>
         <div class="form-inline col-md-3">
-            <h4>Hours on action: @Model.Hours</h4>
+            <h4>@Localizer["Hours in action"]: @Model.Hours</h4>
         </div>
     </div>
 
     <div class="form-row my-3">
         <div class="form-inline col-md-3 offset-6">
-            <h4>Host: @Model.NameHost</h4>
+            <h4>@Localizer["Host"]: @Model.NameHost</h4>
         </div>
     </div>
 }
@@ -102,20 +106,20 @@ else
 
 @if (Model.Status != "sell" && Model.Status != "ignore" && Model.NameHost != User.Identity.Name)
 {
-    <h5 id="HostBid">Host bid: @Model.HostBid </h5>
-    <h5 id="MaxBid">Sum: @Model.MaxBid$</h5>
+    <h5 id="HostBid">@Localizer["Host bid"]: @Model.HostBid </h5>
+    <h5 id="MaxBid">@Localizer["Sum"]: @Model.MaxBid$</h5>
 
     <div class="form-inline my-2">
-        <h5 class="mr-1">Your bid</h5>
+        <h5 class="mr-1">@Localizer["Your bid"]</h5>
         <input type="number" class="form-control col-md-1 mx-2" id="money" />
-        <button type="submit" class="btn btn-dark ml-2" style="width:4vw" id="btnBid">Do Bid</button>
+        <button type="submit" class="btn btn-dark ml-2" style="width:4vw" id="btnBid">@Localizer["Do bid"]</button>
 
     </div>
 
     <div class="form-inline">
-        <h5 class="mr-3">Redemption price: @Model.RedemptionPrice$</h5>
+        <h5 class="mr-3">@Localizer["RedemptionPrice"]: @Model.RedemptionPrice$</h5>
         <form asp-controller="Lot" asp-action="BuyLot">
-            <input type="submit" class="btn btn-dark offset-1" value="Sell" style="width:4vw" />
+            <input type="submit" class="btn btn-dark offset-1" value="@Localizer["Sell"]" style="width:4vw" />
         </form>
     </div>
 }

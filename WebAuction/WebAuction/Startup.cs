@@ -6,6 +6,9 @@ using WebAuction.Models;
 using Microsoft.EntityFrameworkCore; 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using WebAuction.Hubs;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace WebAuction
 {
@@ -28,9 +31,24 @@ namespace WebAuction
 				{
 					options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
 				});
-			
-			services.AddMvc();
+
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+			services.AddMvc().AddDataAnnotationsLocalization().AddViewLocalization();
 			services.AddSignalR();
+
+			services.Configure<RequestLocalizationOptions>(options =>
+			{
+				var supportedCultures = new[]
+				{
+					new CultureInfo("en"),
+					new CultureInfo("ru")
+				};
+
+				options.DefaultRequestCulture = new RequestCulture("ru");
+				options.SupportedCultures = supportedCultures;
+				options.SupportedUICultures = supportedCultures;
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -46,6 +64,9 @@ namespace WebAuction
 
 			app.UseStaticFiles();
 			app.UseAuthentication();
+
+			var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+			app.UseRequestLocalization(locOptions.Value);
 
 			app.UseSignalR(routes =>
 			{

@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Аукцион";
 }
+
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 
 <html>
@@ -9,30 +13,30 @@
     <title>Аукцион</title>
 </head>
 <body>
-    <div class="d-flex justify-content-end offset-4">
-        <form asp-controller="Lot" asp-action="AddOrChangeLot" class="col-1">
-            <button class="btn btn-dark" type="submit">New lot</button>
+    <div style="position:relative; left:18px;" class="my-2">
+        <form asp-controller="Lot" asp-action="AddOrChangeLot" class="col-1 float-right text-right">
+            <button class="btn btn-dark float-right" type="submit">@Localizer["NewLot"]</button>
         </form>
     </div>
 
-    <h3>Lots</h3>
+    <h3>@Localizer["Lots"]</h3>
     @if (User.IsInRole("admin"))
     {
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="view-all-lots" onclick="RefreshTable()">
-            <label class="form-check-label">View all lots</label>
+            <label class="form-check-label">@Localizer["AllLots"]</label>
         </div>
     }
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">MaxBid</th>
-                <th scope="col">HostBid</th>
-                <th scope="col">RedemptionPrice</th>
-                <th scope="col">HostLot</th>
-                <th scope="col">DateEnd</th>
+                <th scope="col">@Localizer["Name"]</th>
+                <th scope="col">@Localizer["MaxBid"]</th>
+                <th scope="col">@Localizer["HostBid"]</th>
+                <th scope="col">@Localizer["RedemptionPrice"]</th>
+                <th scope="col">@Localizer["HostLot"]</th>
+                <th scope="col">@Localizer["DateEnd"]</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -60,7 +64,7 @@
                         $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
                         $("#body-table").append("<td>" + response[i].HostLot + "</td>");
                         $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
-                        $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">Do bid</a></td>");
+                        $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">"+ '@Localizer["DoBid"]' + "</a></td>");
                         $("#body-table").append("</tr>");
                     }
                 }

@@ -37,6 +37,14 @@
         "runtime": {
           "WebAuction.dll": {}
         },
+        "resources": {
+          "eu/WebAuction.resources.dll": {
+            "locale": "eu"
+          },
+          "ru/WebAuction.resources.dll": {
+            "locale": "ru"
+          }
+        },
         "compile": {
           "WebAuction.dll": {}
         }
