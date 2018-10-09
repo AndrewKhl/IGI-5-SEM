@@ -83,3 +83,5 @@ D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAu
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.Resources.ViewModels.ChangeLot.ru.resources
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.Resources.ViewModels.ChangeProfile.en.resources
 D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.Resources.ViewModels.ChangeProfile.ru.resources
+D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.Resources.Views.Shared._Layout.en.resources
+D:\3 курс Информатика БГУИР\ИГИ 5 сем\WebAuction\WebAuction\obj\Debug\netcoreapp2.1\WebAuction.Resources.Views.Shared._Layout.ru.resources

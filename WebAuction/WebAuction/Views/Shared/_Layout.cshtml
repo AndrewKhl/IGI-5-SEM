@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,9 +18,9 @@
 <body>
     <!--меню-->
     <div style="position:absolute; left:70vw; width:30vw;">
-        <span class="greeting">Hello, @User.Identity.Name</span>
+        <span class="greeting">@Localizer["Hello"], @User.Identity.Name</span>
         <form asp-action="Logout" asp-controller="Account" style="position:absolute; left:83.5%; ">
-            <button class="btn btn-dark" style="margin:5px">Logout</button>
+            <button class="btn btn-dark" style="margin:5px">@Localizer["Logout"]</button>
         </form>
     </div>
 
@@ -30,12 +33,12 @@
     <div class="sidebar-menu">
         <h3 id="clock">Clock</h3>
         <ul>
-            <li><a asp-controller="Home" asp-action="Index">Лоты</a></li>
-            <li><a asp-controller="Home" asp-action="Bids">Пользователи</a></li>
-            <li><a asp-controller="Profile" asp-action="ChangeProfile">Профиль</a></li>
+            <li><a asp-controller="Home" asp-action="Index">@Localizer["Lots"]</a></li>
+            <li><a asp-controller="Home" asp-action="Bids">@Localizer["Bids"]</a></li>
+            <li><a asp-controller="Profile" asp-action="ChangeProfile">@Localizer["Profile"]</a></li>
             @if (User.IsInRole("admin"))
             {
-                <li><a asp-controller="Home" asp-action="Users">Пользователи</a></li>
+                <li><a asp-controller="Home" asp-action="Users">@Localizer["Users"]</a></li>
             }
         </ul>
         <div>
@@ -46,16 +49,16 @@
     <div style="position:absolute; top:5vh; width:100vw">
         <nav class="navbar navbar-dark bg-warning justify-content-between">
             <form class="form-inline offset-2 col-4">
-                <input class="form-control mr-sm-2 col-6" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-dark" type="submit">Search</button>
+                <input class="form-control mr-sm-2 col-6" type="search" placeholder="@Localizer["Search"]" aria-label="Search">
+                <button class="btn btn-dark" type="submit">@Localizer["Search"]</button>
             </form>
             <div id="ScoreProfile">
-                <h5>Money: @ViewBag.Score $</h5>
+                <h5>@Localizer["Money"]: @ViewBag.Score $</h5>
             </div>
         </nav>
     </div>
 
-    
+
 
     <script>
         $(document).ready(setInterval(function () {
