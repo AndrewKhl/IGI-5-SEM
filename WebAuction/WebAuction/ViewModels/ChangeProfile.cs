@@ -9,14 +9,14 @@ namespace WebAuction.ViewModels
 {
 	public class ChangeProfile
 	{
-		[Required(ErrorMessage = "Не указано имя")]
+		[Required(ErrorMessage = "NameRequired")]
 		public string Nickname { get; set; }
 
 		public string Name { get; set; }
 
 		public string Password { get; set; }
 
-		[Required(ErrorMessage = "Не указан Email")]
+		[Required(ErrorMessage = "EmailRequired")]
 		public string Email { get; set; }
 
 		public double Cash { get; set; }

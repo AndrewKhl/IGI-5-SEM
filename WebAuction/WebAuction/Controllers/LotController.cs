@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebAuction.Models;
@@ -20,11 +21,14 @@ namespace WebAuction.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public IActionResult AddOrChangeLot(int id)
 		{
 			CountScore();
 			currentLot = db.Lots.FirstOrDefault(l => l.Id == id);
-			ChangeLot model = new ChangeLot
+
+
+			ChangeLot model = currentLot != null ? new ChangeLot
 			{
 				NameLot = currentLot.NameLot,
 				Description = currentLot.Descrition,
@@ -34,29 +38,35 @@ namespace WebAuction.Controllers
 				DateStart = currentLot.DateStart.ToString("yyyy-MM-ddThh:mm"),
 				Id = currentLot.Id,
 				Status = currentLot.Status
-			};
-			TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
-			model.Hours = diff.Hours;
-			Bid bid = GetMaxBid();
-			if (bid != null)
+			} : new ChangeLot();
+
+			if (currentLot != null)
 			{
-				model.MaxBid = bid.Sum;
-				model.HostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId).Nickname;
-			}
-			else
-			{
-				model.MaxBid = 0;
-				model.HostBid = "";
+				TimeSpan diff = currentLot.DateEnd - currentLot.DateStart;
+				model.Hours = diff.Hours;
+				Bid bid = GetMaxBid();
+				if (bid != null)
+				{
+					model.MaxBid = bid.Sum;
+					model.HostBid = db.Users.FirstOrDefault(u => u.Id == bid.HostId).Nickname;
+				}
+				else
+				{
+					model.MaxBid = 0;
+					model.HostBid = "";
+				}
+
+				model.NameHost = db.Users.FirstOrDefault(u => u.Id == currentLot.HostId).Nickname;
+
+				ViewBag.DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm");
 			}
 
-			model.NameHost = db.Users.FirstOrDefault(u => u.Id == currentLot.HostId).Nickname;
-
-			ViewBag.DateStart = currentLot.DateStart.ToString("dd.MM.yyyy hh:mm");
 
 			return View(model);
 		}
 
 		[HttpPost]
+		[Authorize]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddOrChangeLot(ChangeLot model)
 		{
@@ -168,6 +178,7 @@ namespace WebAuction.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public IActionResult BuyLot()
 		{
 			if (BuyLot(currentLot.Id, currentLot.RedemptionPrice, User.Identity.Name))

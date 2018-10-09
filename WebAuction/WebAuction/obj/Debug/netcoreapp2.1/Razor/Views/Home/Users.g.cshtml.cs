@@ -76,7 +76,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(198, 49, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "008f1d294b8945258882bdff50c605f5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ee22ab00917f4fb89935df301ae97295", async() => {
                 BeginContext(204, 36, true);
                 WriteLiteral("\r\n    <title>List of users</title>\r\n");
                 EndContext();
@@ -96,7 +96,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(249, 1040, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3a6ca2a844ec47b99dfeeab22bba13a7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b351bffcbb341cc999ac859bea78360", async() => {
                 BeginContext(255, 10, true);
                 WriteLiteral("\r\n    <h3>");
                 EndContext();
@@ -180,7 +180,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
                 WriteLiteral("</td>\r\n                    <td>\r\n                        ");
                 EndContext();
                 BeginContext(964, 219, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5cf979f9980a45a3b2a6734d3f4e27df", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "208a9fcb2d044407bbc36d3b31a36744", async() => {
                     BeginContext(1059, 117, true);
                     WriteLiteral("\r\n                            <button class=\"btn-dark size-button\" type=\"submit\">!</button>\r\n                        ");
                     EndContext();

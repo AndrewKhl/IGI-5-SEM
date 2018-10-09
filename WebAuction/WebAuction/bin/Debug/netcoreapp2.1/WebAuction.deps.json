@@ -38,8 +38,8 @@
           "WebAuction.dll": {}
         },
         "resources": {
-          "eu/WebAuction.resources.dll": {
-            "locale": "eu"
+          "en/WebAuction.resources.dll": {
+            "locale": "en"
           },
           "ru/WebAuction.resources.dll": {
             "locale": "ru"

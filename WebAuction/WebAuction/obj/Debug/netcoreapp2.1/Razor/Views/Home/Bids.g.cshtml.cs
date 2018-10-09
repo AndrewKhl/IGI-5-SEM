@@ -71,7 +71,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(196, 48, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7057096f4b7643a9a3d3b2b01b3f90b6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fe827835d380430d8c611e3d0dca2800", async() => {
                 BeginContext(202, 35, true);
                 WriteLiteral("\r\n    <title>List of bids</title>\r\n");
                 EndContext();
@@ -91,7 +91,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(246, 2252, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ab8fe4204bc4c5fb57e012867288380", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1b928f9aabc4a88b47854b15cbe0a5b", async() => {
                 BeginContext(252, 10, true);
                 WriteLiteral("\r\n    <h3>");
                 EndContext();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAuction.Models;
@@ -20,6 +21,7 @@ namespace WebAuction.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public IActionResult ChangeProfile(int id = 0)
 		{
 			currentProfile = id == 0 ? db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name) : db.Users.FirstOrDefault(u => u.Id == id);
@@ -39,27 +41,31 @@ namespace WebAuction.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ChangeProfile(ChangeProfile model)
+		public IActionResult ChangeProfile(ChangeProfile model)
 		{
 			CountScore();
 			if (ModelState.IsValid)
 			{
-				var changeUser = db.Users.FirstOrDefault(u => u.Email == model.Email);
+				var changeUser = db.Users.FirstOrDefault(u => u.Id == currentProfile.Id);
 				if (changeUser != null)
 				{
 					changeUser.Name = model.Name;
 					changeUser.Nickname = model.Nickname;
 					changeUser.Email = model.Email;
 					changeUser.Password = model.Password ?? changeUser.Password;
-					await db.SaveChangesAsync();
-					return RedirectToAction("Index", "Home");
+					db.SaveChanges();
+					if (currentProfile.Nickname != model.Nickname)
+						return RedirectToAction("Login", "Account");
+					else
+						return RedirectToAction("Index", "Home");
 				}
 				else
 					ModelState.AddModelError("", "Ошибка авторизации");
 			}
 
-			return View(model);
+			return ChangeProfile();
 		}
 
 		public void CountScore()
