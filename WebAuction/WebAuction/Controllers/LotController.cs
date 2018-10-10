@@ -107,7 +107,7 @@ namespace WebAuction.Controllers
 					db.Lots.Add(currentLot);
 
 					await db.SaveChangesAsync();
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Lots", "Home");
 				}
 				else
 				{
@@ -129,7 +129,7 @@ namespace WebAuction.Controllers
 					currentLot.DateEnd = currentLot.DateStart.AddHours(model.Hours);
 
 					await db.SaveChangesAsync();
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Lots", "Home");
 				}
 
 			}
@@ -182,7 +182,7 @@ namespace WebAuction.Controllers
 		public IActionResult BuyLot()
 		{
 			if (BuyLot(currentLot.Id, currentLot.RedemptionPrice, User.Identity.Name))
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Lots", "Home");
 			else
 				return AddOrChangeLot(currentLot.Id);
 		}

@@ -40,7 +40,7 @@ namespace WebAuction.Controllers
 					
 					await Authenticate(user); // аутентификация
 
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Lots", "Home");
 				}
 				ModelState.AddModelError("", "Некорректные логин и(или) пароль");
 			}
@@ -72,7 +72,7 @@ namespace WebAuction.Controllers
 
 					await Authenticate(user); // аутентификация
 
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Lots", "Home");
 				}
 				else
 					ModelState.AddModelError("", "Пользователь с таким email/nickname существует");

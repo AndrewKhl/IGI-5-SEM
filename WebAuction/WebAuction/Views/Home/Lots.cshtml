@@ -45,30 +45,37 @@
 
     <script>
         function RefreshTable() {
+            var value = $("#valueSearch").val();
             var status = $('#view-all-lots').is(":checked");
             $.ajax({
-                url: '@Url.Action("Refresh", "Home")',
-                type: "GET",
-                data: "str=" + status,
-                success: function (response) {
-                    response = JSON.parse(response);
-                    $("#body-table").empty();
-                    for (var i = 0; i < response.length; i++) {
-                        $("#body-table").append("<tr>");
-                        $("#body-table").append("<td>" + response[i].Id + "</td>");
-                        $("#body-table").append("<td>" + response[i].NameLot + "</td>");
-                        $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
-                        if (response[i].HostBid == null)
-                            response[i].HostBid = "";
-                        $("#body-table").append("<td>" + response[i].HostBid + "</td>");
-                        $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
-                        $("#body-table").append("<td>" + response[i].HostLot + "</td>");
-                        $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
-                        $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">"+ '@Localizer["DoBid"]' + "</a></td>");
-                        $("#body-table").append("</tr>");
-                    }
+                url: '@Url.Action("SearchValue", "Home")',
+                type: "POST",
+                data: { 'value': value, 'status': status },
+                success: function (data) {
+                    CreateTable(data);
                 }
             });
+        };
+
+        $("#btnSearch").on("click", RefreshTable);
+
+        function CreateTable(response) {
+            response = JSON.parse(response);
+            $("#body-table").empty();
+            for (var i = 0; i < response.length; i++) {
+                $("#body-table").append("<tr>");
+                $("#body-table").append("<td>" + response[i].Id + "</td>");
+                $("#body-table").append("<td>" + response[i].NameLot + "</td>");
+                $("#body-table").append("<td>" + response[i].MaxBid + "</td>");
+                if (response[i].HostBid == null)
+                    response[i].HostBid = "";
+                $("#body-table").append("<td>" + response[i].HostBid + "</td>");
+                $("#body-table").append("<td>" + response[i].RedemptionPrice + "</td>");
+                $("#body-table").append("<td>" + response[i].HostLot + "</td>");
+                $("#body-table").append("<td>" + response[i].DateEnd + "</td>");
+                $("#body-table").append("<td><a href=\"/Lot/AddOrChangeLot/" + response[i].Id + "/\">"+ '@Localizer["DoBid"]' + "</a></td>");
+                $("#body-table").append("</tr>");
+            }
         };
 
         $(document).ready(function () {

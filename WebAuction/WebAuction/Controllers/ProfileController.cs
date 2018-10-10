@@ -59,7 +59,7 @@ namespace WebAuction.Controllers
 					if (currentProfile.Nickname != model.Nickname)
 						return RedirectToAction("Login", "Account");
 					else
-						return RedirectToAction("Index", "Home");
+						return RedirectToAction("Lots", "Home");
 				}
 				else
 					ModelState.AddModelError("", "Ошибка авторизации");

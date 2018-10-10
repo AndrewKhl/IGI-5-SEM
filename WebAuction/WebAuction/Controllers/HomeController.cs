@@ -16,13 +16,15 @@ namespace WebAuction.Controllers
 	public class HomeController : Controller
 	{
 		AuctionContext db;
+		static string extended;
+
 		public HomeController(AuctionContext context)
 		{
 			db = context;
 		}
 
 		[Authorize]
-		public IActionResult Index(int id = 0)
+		public IActionResult Lots(int id = 0)
 		{
 			CountScore();
 			return View(GetTableLots());
@@ -49,8 +51,7 @@ namespace WebAuction.Controllers
 			ViewBag.Score = currentUser.Cash;
 		}
 
-		[HttpGet]
-		public JsonResult Refresh(string str)
+		private JsonResult Refresh(string str)
 		{
 			bool status = str == "false" ? false : true;
 			DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TableLot[]));
@@ -64,9 +65,9 @@ namespace WebAuction.Controllers
 		private TableLot[] GetTableLots(bool status = false)
 		{
 			var lots = !status ? db.Lots.Where
-				(l => l.Status != "sell" && 
-				l.Status != "ignore" && 
-				DateTime.Compare(DateTime.Now, l.DateStart) > -1 && 
+				(l => l.Status != "sell" &&
+				l.Status != "ignore" &&
+				DateTime.Compare(DateTime.Now, l.DateStart) > -1 &&
 				DateTime.Compare(DateTime.Now, l.DateEnd) < 1) : db.Lots;
 
 			var extendedLots = lots.Join(db.Users,
@@ -100,6 +101,15 @@ namespace WebAuction.Controllers
 					lot.HostBid = "";
 				}
 			}
+
+			if (extended != null)
+				tableLots = tableLots.Where(l => l.NameLot.IndexOf(extended) != -1
+				|| l.HostBid.IndexOf(extended) != -1
+				|| l.HostLot.IndexOf(extended) != -1
+				|| l.Id.ToString().IndexOf(extended) != -1
+				|| l.MaxBid.ToString().IndexOf(extended) != -1
+				|| l.StartPrice.ToString().IndexOf(extended) != -1
+			).ToArray();
 
 			lots = db.Lots.Where(l => l.Status == "" && DateTime.Compare(DateTime.Now, l.DateEnd) != -1);
 
@@ -170,6 +180,13 @@ namespace WebAuction.Controllers
 			);
 
 			return LocalRedirect(returnUrl);
+		}
+
+		[HttpPost]
+		public JsonResult SearchValue(string value, string status)
+		{
+			extended = value == "null" ? null : value;
+			return Refresh(status);
 		}
 	}
 }
