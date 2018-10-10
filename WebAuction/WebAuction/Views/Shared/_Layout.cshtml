@@ -57,11 +57,13 @@
     </div>
 
     <script>
-        $(document).ready(setInterval(function () {
+        function SetTime() {
             var now = new Date();
             var clock = document.getElementById("clock");
             clock.innerHTML = now.toLocaleTimeString();
-        }, 1000));
+        };
+        SetTime();
+        $(document).ready(setInterval(SetTime, 1000));
     </script>
 </body>
 </html>

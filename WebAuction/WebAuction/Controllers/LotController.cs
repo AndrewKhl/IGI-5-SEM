@@ -37,7 +37,9 @@ namespace WebAuction.Controllers
 				RedemptionPrice = currentLot.RedemptionPrice,
 				DateStart = currentLot.DateStart.ToString("yyyy-MM-ddThh:mm"),
 				Id = currentLot.Id,
-				Status = currentLot.Status
+				Status = currentLot.Status,
+				Picture = currentLot.Picture
+
 			} : new ChangeLot();
 
 			if (currentLot != null)
@@ -55,6 +57,9 @@ namespace WebAuction.Controllers
 					model.MaxBid = 0;
 					model.HostBid = "";
 				}
+
+				if (model.Picture == null)
+					model.Picture = "no_image.png";
 
 				model.NameHost = db.Users.FirstOrDefault(u => u.Id == currentLot.HostId).Nickname;
 
@@ -82,7 +87,7 @@ namespace WebAuction.Controllers
 						Quantity = model.Quantity,
 						StartPrice = model.StartPrice,
 						RedemptionPrice = model.RedemptionPrice,
-						Descrition = model.Description
+						Descrition = Request.Form["DescriptionLot"].ToString()
 
 					};
 
@@ -99,7 +104,7 @@ namespace WebAuction.Controllers
 						currentLot.DateStart = DateTime.Now;
 
 					currentLot.DateEnd = currentLot.DateStart.AddHours(model.Hours);
-
+					currentLot.Picture = model.Picture;
 
 					User currentUser = db.Users.FirstOrDefault(u => u.Nickname == User.Identity.Name);
 					currentLot.HostId = currentUser.Id;
@@ -112,7 +117,7 @@ namespace WebAuction.Controllers
 				else
 				{
 					currentLot.NameLot = model.NameLot;
-					currentLot.Descrition = model.Description;
+					currentLot.Descrition = Request.Form["DescriptionLot"].ToString();
 					currentLot.Quantity = model.Quantity;
 					currentLot.StartPrice = model.StartPrice;
 					currentLot.RedemptionPrice = model.RedemptionPrice;

@@ -109,6 +109,7 @@ namespace WebAuction.Controllers
 				|| l.Id.ToString().IndexOf(extended) != -1
 				|| l.MaxBid.ToString().IndexOf(extended) != -1
 				|| l.StartPrice.ToString().IndexOf(extended) != -1
+				|| l.RedemptionPrice.ToString().IndexOf(extended) != -1
 			).ToArray();
 
 			lots = db.Lots.Where(l => l.Status == "" && DateTime.Compare(DateTime.Now, l.DateEnd) != -1);

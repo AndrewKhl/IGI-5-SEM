@@ -9,37 +9,43 @@
 
 <h2>@Localizer["Lot"]</h2>
 
-@if (User.IsInRole("admin") || Model.NameHost == User.Identity.Name)
+@if (Model.Id > 0)
+{
+    <image src="/images/@Model.Picture" style="position:absolute; width:30vw; height:25vw;" />
+}
+
+@if (User.IsInRole("admin") || Model.NameHost == User.Identity.Name || Model.Id == 0)
 {
     <form asp-controller="Lot" asp-action="AddOrChangeLot" asp-anti-forgery="true">
         <div asp-validation-summary="ModelOnly" class="list-errors offset-6"></div>
+
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
                 <label>@Localizer["Name"]</label>
-                <input asp-for="NameLot" type="text" class="form-control" placeholder="Name">
+                <input asp-for="NameLot" type="text" class="form-control" placeholder="@Localizer["Name"]">
                 <span asp-validation-for="NameLot" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
                 <label>@Localizer["Quantity"]</label>
-                <input asp-for="Quantity" type="number" class="form-control" placeholder="Quantity">
+                <input asp-for="Quantity" type="number" class="form-control" placeholder="@Localizer["Quantity"]">
                 <span asp-validation-for="Quantity" style="color:red"></span>
             </div>
         </div>
 
         <div class="form-group offset-6">
             <label>@Localizer["Description"]</label>
-            <textarea type="text" class="form-control" rows="3">@Model.Description</textarea>
+            <textarea type="text" class="form-control" rows="3" name="DescriptionLot">@Model.Description</textarea>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
                 <label>@Localizer["StartPrice"]</label>
-                <input asp-for="StartPrice" type="number" class="form-control" placeholder="Start price">
+                <input asp-for="StartPrice" type="number" class="form-control" placeholder="@Localizer["StartPrice"]">
                 <span asp-validation-for="StartPrice" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
                 <label>@Localizer["RedemptionPrice"]</label>
-                <input asp-for="RedemptionPrice" type="number" class="form-control" placeholder="Redemtion price">
+                <input asp-for="RedemptionPrice" type="number" class="form-control" placeholder="@Localizer["RedemptionPrice"]">
                 <span asp-validation-for="RedemptionPrice" style="color:red"></span>
             </div>
         </div>
@@ -47,13 +53,20 @@
         <div class="form-row">
             <div class="form-group col-md-3 offset-6">
                 <label>@Localizer["Date start"]</label>
-                <input asp-for="DateStart" type="datetime-local" class="form-control" placeholder="Date start" value="@Model.DateStart">
+                <input asp-for="DateStart" type="datetime-local" class="form-control" placeholder="@Localizer["Date start"]" value="@Model.DateStart">
                 <span asp-validation-for="DateStart" style="color:red"></span>
             </div>
             <div class="form-group col-md-3">
                 <label>@Localizer["Hours in action"]</label>
-                <input asp-for="Hours" type="number" class="form-control" placeholder="Hours">
+                <input asp-for="Hours" type="number" class="form-control" placeholder="@Localizer["Hours in action"]">
                 <span asp-validation-for="Hours" style="color:red"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3 offset-9">
+                <label>@Localizer["Picture"]</label>
+                <input asp-for="Picture" class="form-control" placeholder="@Localizer["Picture"]">
             </div>
         </div>
 
@@ -64,6 +77,8 @@
 }
 else
 {
+    <image src="~/root/images/ + @Model.Picture + .png" />
+
     <div class="form-row my-3">
         <div class="form-inline col-md-3 offset-6">
             <h4>@Localizer["Name"]: @Model.NameLot</h4>
@@ -96,7 +111,7 @@ else
         </div>
     </div>
 
-    <div class="form-row my-3">
+    <div class="form-row my-3 mb-5">
         <div class="form-inline col-md-3 offset-6">
             <h4>@Localizer["Host"]: @Model.NameHost</h4>
         </div>
@@ -104,23 +119,24 @@ else
 }
 
 
-@if (Model.Status != "sell" && Model.Status != "ignore" && Model.NameHost != User.Identity.Name)
+@if (Model.Status != "sell" && Model.Status != "ignore" && Model.NameHost != User.Identity.Name && Model.Id > 0)
 {
-    <h5 id="HostBid">@Localizer["Host bid"]: @Model.HostBid </h5>
-    <h5 id="MaxBid">@Localizer["Sum"]: @Model.MaxBid$</h5>
+    <div style="position:absolute; top:50vh" class="col-12">
+        <h5 id="HostBid" class="mt-5">@Localizer["Host bid"]: @Model.HostBid </h5>
+        <h5 id="MaxBid">@Localizer["Sum"]: @Model.MaxBid$</h5>
 
-    <div class="form-inline my-2">
-        <h5 class="mr-1">@Localizer["Your bid"]</h5>
-        <input type="number" class="form-control col-md-1 mx-2" id="money" />
-        <button type="submit" class="btn btn-dark ml-2" style="width:4vw" id="btnBid">@Localizer["Do bid"]</button>
+        <div class="form-inline my-2">
+            <h5 class="mr-1">@Localizer["Your bid"]</h5>
+            <input type="number" class="form-control col-md-1 mx-2" id="money" />
+            <button type="submit" class="btn btn-dark ml-2" style="width:4vw" id="btnBid">@Localizer["Do bid"]</button>
+        </div>
 
-    </div>
-
-    <div class="form-inline">
-        <h5 class="mr-3">@Localizer["RedemptionPrice"]: @Model.RedemptionPrice$</h5>
-        <form asp-controller="Lot" asp-action="BuyLot">
-            <input type="submit" class="btn btn-dark offset-1" value="@Localizer["Sell"]" style="width:4vw" />
-        </form>
+        <div class="form-inline">
+            <h5 class="mr-3">@Localizer["RedemptionPrice"]: @Model.RedemptionPrice$</h5>
+            <form asp-controller="Lot" asp-action="BuyLot">
+                <input type="submit" class="btn btn-dark offset-1" value="@Localizer["Sell"]" style="width:4vw" />
+            </form>
+        </div>
     </div>
 }
 
@@ -147,7 +163,7 @@ else
                     connection.invoke("Send", val.Score, val.Name);
 
                     $("#ScoreProfile").empty();
-                    $("#ScoreProfile").append("<h5>" + val.Cash + " $ </h5>");
+                    $("#ScoreProfile").append("<h5>Money: " + val.Cash + " $ </h5>");
                 }
                 else {
                     alert(val.Message);

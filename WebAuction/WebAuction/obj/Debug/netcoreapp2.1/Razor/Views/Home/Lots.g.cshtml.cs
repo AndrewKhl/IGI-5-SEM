@@ -76,7 +76,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(206, 43, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1c57083441da4cd5a507f80e3e717fa1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2a234d6c2cbd4e8eb0469850d476fa27", async() => {
                 BeginContext(212, 30, true);
                 WriteLiteral("\r\n    <title>Аукцион</title>\r\n");
                 EndContext();
@@ -96,12 +96,12 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(251, 3039, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "597d88d344474b5c8133591e80effcca", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6a4e61a783640c48c8e53ffb9109aa7", async() => {
                 BeginContext(257, 72, true);
                 WriteLiteral("\r\n    <div style=\"position:relative; left:18px;\" class=\"my-2\">\r\n        ");
                 EndContext();
                 BeginContext(329, 207, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6c32f0ab9e8f42168894552ccd008b6a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f9268490e97949839725bab8edb874a1", async() => {
                     BeginContext(421, 69, true);
                     WriteLiteral("\r\n            <button class=\"btn btn-dark float-right\" type=\"submit\">");
                     EndContext();

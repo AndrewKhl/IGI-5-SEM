@@ -27,5 +27,6 @@ namespace WebAuction.Models
 		[DataMember]
 		public double RedemptionPrice { get; set; }
 		public int HostId { get; set; }
+		public string Picture { get; set; }
 	}
 }
